@@ -1,0 +1,14 @@
+{
+  "name": "bitlap",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "npm run start:docs",
+    "start:docs": "docgeni serve --port 4700",
+    "build:docs": "docgeni build --prod"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@docgeni/cli": "^1.0.1",
+    "@docgeni/template": "^1.0.1"
+  }
+}
