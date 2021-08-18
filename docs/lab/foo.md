@@ -1,10 +1,13 @@
 ---
+toc: menu
 nav:
-  title: Components
-  path: /components
+  path: /lab/foo
+  order: 1
 ---
 
-## Foo
+# Foo
+
+## FooH
 
 Demo:
 

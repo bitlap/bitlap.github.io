@@ -1,7 +1,5 @@
 ---
-nav:
-  title: 组件
-  path: /components
+sidemenu: false
 ---
 
 ## Foo

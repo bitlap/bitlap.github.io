@@ -14,12 +14,35 @@ export default defineConfig({
   // Because of using GitHub Pages
   // base: `/${repo}/`,
   // publicPath: `/${repo}/`,
-  navs: [
-    null,
-    {
-      title: "GitHub",
-      path: "https://github.com/bitlap/bitlap"
-    }
-  ]
+  navs: {
+    "en-US": [
+      // null,
+      {
+        title: "Lab",
+        children: [
+          { title: "Scala-Macro-Tools", path: "/lab/smt" },
+          { title: "Foo", path: "/lab/foo" }
+        ]
+      },
+      {
+        title: "GitHub",
+        path: "https://github.com/bitlap/bitlap"
+      }
+    ],
+    "zh-CN": [
+      // null,
+      {
+        title: "实验室",
+        children: [
+          { title: "Scala-Macro-Tools", path: "/zh-CN/lab/smt" },
+          { title: "Foo", path: "/zh-CN/lab/foo" }
+        ]
+      },
+      {
+        title: "GitHub",
+        path: "https://github.com/bitlap/bitlap"
+      }
+    ]
+  }
   // more config: https://d.umijs.org/config
 });
