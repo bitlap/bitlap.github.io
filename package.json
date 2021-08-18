@@ -21,8 +21,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitlap/bitlap",
-    "branch": "main"
+    "url": "git+https://github.com/bitlap/bitlap.github.io.git",
+    "branch": "main",
+    "platform": "github"
   },
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [
