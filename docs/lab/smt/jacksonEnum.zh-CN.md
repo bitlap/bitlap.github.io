@@ -19,10 +19,7 @@ nav:
 
 ```scala
 @jacksonEnum(nonTypeRefers = Seq("EnumType"))
-class B(
-        var enum1: EnumType.EnumType,
-        enum2: EnumType2.EnumType2 = EnumType2.A,
-        i: Int)
+class B(var enum1: EnumType.EnumType, enum2: EnumType2.EnumType2 = EnumType2.A, i: Int)
 ```
 
 **宏生成的中间代码**
