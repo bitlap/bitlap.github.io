@@ -73,7 +73,7 @@ message BOpenSession {
 
 ```scala
 Expr[io.github.dreamylost.sofa.CustomRpcProcessor[org.bitlap.network.proto.driver.BOpenSession.BOpenSessionReq]]({
-  class 83e5be1066da49d18b2f870e77656bf7 extends io.github.dreamylost.sofa.CustomRpcProcessor[org.bitlap.network.proto.driver.BOpenSession.BOpenSessionReq](executor, org.bitlap.network.proto.driver.BOpenSession.BOpenSessionResp.getDefaultInstance()) {
+  class 544148dc561345a4b10981735546b6af extends io.github.dreamylost.sofa.CustomRpcProcessor[org.bitlap.network.proto.driver.BOpenSession.BOpenSessionReq](executor, org.bitlap.network.proto.driver.BOpenSession.BOpenSessionResp.getDefaultInstance()) {
     <paramaccessor> private val service: io.github.dreamylost.sofa.NetService = _;
     <paramaccessor> private[this] val executor: java.util.concurrent.Executor = _;
     def <init>(service: io.github.dreamylost.sofa.NetService, executor: java.util.concurrent.Executor = null) = {
@@ -87,9 +87,9 @@ Expr[io.github.dreamylost.sofa.CustomRpcProcessor[org.bitlap.network.proto.drive
       val configurationMap: java.util.Map[String,String] = req.getConfigurationMap();
       val ret: String = service.openSession(username, password, scala.jdk.CollectionConverters.MapHasAsScala[String, String](configurationMap).asScala.toMap[String, String](scala.this.<:<.refl[(String, String)]));
       org.bitlap.network.proto.driver.BOpenSession.BOpenSessionResp.newBuilder().setSessionHandle(ret).build()
-    })(new NetService(), done, request);
-    override def processError(rpcCtx: com.alipay.sofa.jraft.rpc.RpcContext, exception: Exception): com.google.protobuf.Message = ((service: io.github.dreamylost.sofa.NetService, rpcContext: com.alipay.sofa.jraft.rpc.RpcContext, exception: Exception) => org.bitlap.network.proto.driver.BOpenSession.BOpenSessionResp.newBuilder().setStatus(exception.getLocalizedMessage()).build())(new NetService(), rpcCtx, exception)
+    })(service, done, request);
+    override def processError(rpcCtx: com.alipay.sofa.jraft.rpc.RpcContext, exception: Exception): com.google.protobuf.Message = ((service: io.github.dreamylost.sofa.NetService, rpcContext: com.alipay.sofa.jraft.rpc.RpcContext, exception: Exception) => org.bitlap.network.proto.driver.BOpenSession.BOpenSessionResp.newBuilder().setStatus(exception.getLocalizedMessage()).build())(service, rpcCtx, exception)
   };
-  new 83e5be1066da49d18b2f870e77656bf7(new NetService(), null)
+  new 544148dc561345a4b10981735546b6af(new NetService(), null)
 })
 ```
