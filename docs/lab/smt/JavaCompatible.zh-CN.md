@@ -8,13 +8,13 @@ nav:
 
 注解`@JavaCompatible` 用于为样例类生成无参构造函数和get/set方法。这在同时使用Scala 样例类和Java库（如myabtis和springboot）时非常有用。
 
-**Note**
+**说明**
 
 - verbose 指定是否开启详细编译日志。可选，默认false。
 
 - 仅支持在样例类（case class）上使用。
 
-**Example**
+**示例**
 
 ```scala
 // 有继承父类的
