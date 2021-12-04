@@ -68,3 +68,28 @@ message BOpenSession {
       new NetService, BOpenSessionResp.getDefaultInstance, null
     )
 ```
+
+**宏展开**
+
+```scala
+Expr[io.github.dreamylost.sofa.CustomRpcProcessor[org.bitlap.network.proto.driver.BOpenSession.BOpenSessionReq]]({
+  class 83e5be1066da49d18b2f870e77656bf7 extends io.github.dreamylost.sofa.CustomRpcProcessor[org.bitlap.network.proto.driver.BOpenSession.BOpenSessionReq](executor, org.bitlap.network.proto.driver.BOpenSession.BOpenSessionResp.getDefaultInstance()) {
+    <paramaccessor> private val service: io.github.dreamylost.sofa.NetService = _;
+    <paramaccessor> private[this] val executor: java.util.concurrent.Executor = _;
+    def <init>(service: io.github.dreamylost.sofa.NetService, executor: java.util.concurrent.Executor = null) = {
+      super.<init>();
+      ()
+    };
+    override def processRequest(request: org.bitlap.network.proto.driver.BOpenSession.BOpenSessionReq, done: com.alipay.sofa.jraft.rpc.RpcRequestClosure): com.google.protobuf.Message = ((service: io.github.dreamylost.sofa.NetService, rpcRequestClosure: com.alipay.sofa.jraft.rpc.RpcRequestClosure, req: org.bitlap.network.proto.driver.BOpenSession.BOpenSessionReq) => {
+      import scala.jdk.CollectionConverters.MapHasAsScala;
+      val username: String = req.getUsername();
+      val password: String = req.getPassword();
+      val configurationMap: java.util.Map[String,String] = req.getConfigurationMap();
+      val ret: String = service.openSession(username, password, scala.jdk.CollectionConverters.MapHasAsScala[String, String](configurationMap).asScala.toMap[String, String](scala.this.<:<.refl[(String, String)]));
+      org.bitlap.network.proto.driver.BOpenSession.BOpenSessionResp.newBuilder().setSessionHandle(ret).build()
+    })(new NetService(), done, request);
+    override def processError(rpcCtx: com.alipay.sofa.jraft.rpc.RpcContext, exception: Exception): com.google.protobuf.Message = ((service: io.github.dreamylost.sofa.NetService, rpcContext: com.alipay.sofa.jraft.rpc.RpcContext, exception: Exception) => org.bitlap.network.proto.driver.BOpenSession.BOpenSessionResp.newBuilder().setStatus(exception.getLocalizedMessage()).build())(new NetService(), rpcCtx, exception)
+  };
+  new 83e5be1066da49d18b2f870e77656bf7(new NetService(), null)
+})
+```
