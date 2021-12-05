@@ -69,27 +69,44 @@ message BOpenSession {
     )
 ```
 
-**宏展开**
+## Processable 改进
+
+简化分两种，第一种：
+- `executor`参数 直接使用`null`，不支持传入自定义参数。
+- `defaultResp`参数 直接使用`Resp.getDefaultInstance`创建默认对象 ，不支持传入自定义参数。
 
 ```scala
-Expr[io.github.dreamylost.sofa.CustomRpcProcessor[org.bitlap.network.proto.driver.BOpenSession.BOpenSessionReq]]({
-  class 544148dc561345a4b10981735546b6af extends io.github.dreamylost.sofa.CustomRpcProcessor[org.bitlap.network.proto.driver.BOpenSession.BOpenSessionReq](executor, org.bitlap.network.proto.driver.BOpenSession.BOpenSessionResp.getDefaultInstance()) {
-    <paramaccessor> private val service: io.github.dreamylost.sofa.NetService = _;
-    <paramaccessor> private[this] val executor: java.util.concurrent.Executor = _;
-    def <init>(service: io.github.dreamylost.sofa.NetService, executor: java.util.concurrent.Executor = null) = {
-      super.<init>();
-      ()
-    };
-    override def processRequest(request: org.bitlap.network.proto.driver.BOpenSession.BOpenSessionReq, done: com.alipay.sofa.jraft.rpc.RpcRequestClosure): com.google.protobuf.Message = ((service: io.github.dreamylost.sofa.NetService, rpcRequestClosure: com.alipay.sofa.jraft.rpc.RpcRequestClosure, req: org.bitlap.network.proto.driver.BOpenSession.BOpenSessionReq) => {
-      import scala.jdk.CollectionConverters.MapHasAsScala;
-      val username: String = req.getUsername();
-      val password: String = req.getPassword();
-      val configurationMap: java.util.Map[String,String] = req.getConfigurationMap();
-      val ret: String = service.openSession(username, password, scala.jdk.CollectionConverters.MapHasAsScala[String, String](configurationMap).asScala.toMap[String, String](scala.this.<:<.refl[(String, String)]));
-      org.bitlap.network.proto.driver.BOpenSession.BOpenSessionResp.newBuilder().setSessionHandle(ret).build()
-    })(service, done, request);
-    override def processError(rpcCtx: com.alipay.sofa.jraft.rpc.RpcContext, exception: Exception): com.google.protobuf.Message = ((service: io.github.dreamylost.sofa.NetService, rpcContext: com.alipay.sofa.jraft.rpc.RpcContext, exception: Exception) => org.bitlap.network.proto.driver.BOpenSession.BOpenSessionResp.newBuilder().setStatus(exception.getLocalizedMessage()).build())(service, rpcCtx, exception)
-  };
-  new 544148dc561345a4b10981735546b6af(new NetService(), null)
-})
+    val openSession = Processable[NetService, BOpenSessionReq, BOpenSessionResp](new NetService)(
+      (service, _, req) => {
+        import scala.jdk.CollectionConverters.MapHasAsScala
+        val username = req.getUsername
+        val password = req.getPassword
+        val configurationMap = req.getConfigurationMap
+        val ret = service.openSession(username, password, configurationMap.asScala.toMap)
+        BOpenSessionResp.newBuilder().setSessionHandle(ret).build()
+      },
+      (_, _, exception) => {
+        BOpenSessionResp.newBuilder().setStatus(exception.getLocalizedMessage).build()
+      }
+    )
+```
+
+简化的第二种：
+- `service`参数 为`Service`泛型反射出对象，不支持传入自定义参数。
+- 仅支持非抽象类且必须含有默认无参构造函数。
+
+```scala
+    val openSession = Processable[BOpenSessionReq, BOpenSessionResp, NetService](
+      (service, rpc, req) => {
+        import scala.jdk.CollectionConverters.MapHasAsScala
+        val username = req.getUsername
+        val password = req.getPassword
+        val configurationMap = req.getConfigurationMap
+        val ret = service.openSession(username, password, configurationMap.asScala.toMap)
+        BOpenSessionResp.newBuilder().setSessionHandle(ret).build()
+      },
+      (service, rpc, exception) => {
+        BOpenSessionResp.newBuilder().setStatus(exception.getLocalizedMessage).build()
+      }
+    )
 ```
