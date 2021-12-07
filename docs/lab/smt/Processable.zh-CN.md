@@ -4,7 +4,9 @@ nav:
   path: /lab/smt
 ---
 
-## Processable
+## Processable 过期的
+
+该实现仅0.3.3可用
 
 `Processable`宏用于在不创建新的类文件的情况下创建`com.alipay.sofa.jraft.rpc.RpcRequestProcessor`的实例。
 
