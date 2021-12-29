@@ -9,9 +9,9 @@
     <link
       rel="shortcut icon"
       type="image/x-icon"
-      href="https://user-images.githubusercontent.com/9554297/83762004-a0761b00-a6a9-11ea-83b4-9c8ff721d4b8.png"
+      href="http://ice-img.flutterdart.cn/2021-12-29-ic_fish.png"
     />
-    <link rel="stylesheet" href="/umi.09c6ed48.css" />
+    <link rel="stylesheet" href="/umi.8c6752e0.css" />
     <script>
       window.routerBase = "/";
     </script>
@@ -25,7 +25,7 @@
           r = ["light", "dark", "auto"];
         document.documentElement.setAttribute(
           "data-prefers-color",
-          e === r[2] ? (t ? r[1] : r[0]) : r.includes(e) ? e : r[0]
+          e === r[2] ? (t ? r[1] : r[0]) : r.indexOf(e) > -1 ? e : r[0]
         );
       })();
     </script>
@@ -33,6 +33,6 @@
   <body>
     <div id="root"></div>
 
-    <script src="/umi.b44fcbdc.js"></script>
+    <script src="/umi.81d53a64.js"></script>
   </body>
 </html>
