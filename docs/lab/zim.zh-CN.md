@@ -1,8 +1,9 @@
 ---
-sidemenu: false
+toc: menu
+nav:
+  path: /lab/zim
+  order: 1
 ---
-
-## zim
 
 
 [zim]((https://github.com/bitlap/zim)) 是一个基于 scala 和 zio 实现的 web im。
