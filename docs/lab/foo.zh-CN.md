@@ -2,15 +2,21 @@
 sidemenu: false
 ---
 
-## Foo
+## zim
 
-Demo:
 
-```tsx
-import React from "react";
-import { Foo } from "bitlap";
+[zim]((https://github.com/bitlap/zim)) 是一个基于 scala 和 zio 实现的 web im。
 
-export default () => <Foo title="First Demo" />;
-```
 
-[更多技巧](https://d.umijs.org/guide/demo-principle)
+## 环境
+
+
+## 技术栈
+
+
+## 快速开始
+
+
+## 如何参与贡献
+
+
