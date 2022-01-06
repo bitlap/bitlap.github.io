@@ -23,7 +23,7 @@ export default defineConfig({
         title: "Lab",
         children: [
           { title: "Scala-Macro-Tools", path: "/lab/smt" },
-          { title: "Foo", path: "/lab/foo" }
+          { title: "Foo", path: "/lab/zim" }
         ]
       },
       {
@@ -37,7 +37,7 @@ export default defineConfig({
         title: "实验室",
         children: [
           { title: "Scala-Macro-Tools", path: "/zh-CN/lab/smt" },
-          { title: "Foo", path: "/zh-CN/lab/foo" }
+          { title: "Foo", path: "/zh-CN/lab/zim" }
         ]
       },
       {
