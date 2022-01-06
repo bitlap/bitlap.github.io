@@ -5,8 +5,6 @@ nav:
   order: 1
 ---
 
-## zim
-
 
 [zim]((https://github.com/bitlap/zim)) is a web-im based on scala with zio.
 
