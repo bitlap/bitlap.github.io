@@ -9,13 +9,16 @@ nav:
 [zim]((https://github.com/bitlap/zim)) is a web-im based on scala with zio.
 
 
-## Environment
+# zim
 
 
-## Technology stack
+## environment
 
 
-## Quick start
+## technology stack
 
 
-## How to contribute
+## quick start
+
+
+## how to contribute
