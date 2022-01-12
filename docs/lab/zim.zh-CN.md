@@ -79,9 +79,9 @@ zim 初衷是学习从零开发一个纯 Scala 式的应用程序，为何选择
 ## 如何参与贡献
 
 1. 拉下代码 `git clone gh repo clone bitlap/zim`，并执行`sbt compile` 编译。（第一次构建不要使用IDE的build）
-2. 修改代码并编写单元测试
+2. 参考issue，选择自己能解决的，修改代码并编写单元测试
 3. 调试代码，参考 "运行环境准备"
-4. 使用`sbt compile` 格式化代码
+4. 使用`sbt compile` 自动格式化代码
 5. 使用`sbt scalafmtCheckAll` 检查格式化 
 6. 使用`sbt coverage test coverageReport` 执行测试
 7. 创建 pull request
