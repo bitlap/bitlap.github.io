@@ -29,19 +29,19 @@ zim 名字取自 zio 和 IM 的结合体。
 - zio-redis
 - zio-actors
 
-zim 同时会选用简单易用的 Scala 框架或库，尽可能不使用任何 Java 库和类型系统来构建程序。
+zim 同时会选用简单易用的 scala 框架或库，尽可能不使用任何 java 库和类型系统来构建程序。
 
-zim 初衷是学习从零开发一个纯 Scala 式的应用程序，为何选择 zio 全家桶？这是因为 zio 相对其他的来说较容易也较完善。
+zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择 zio 全家桶？这是因为 zio 相对其他的来说较容易也较完善。
 
-基于时间考虑，zim 目前不会直接使用 zio2.x 和 akka typed actor，但大概率后续会升级到最新版。
+基于时间考虑，zim 目前不会直接使用 zio 2.x 和 akka typed actor，但大概率后续会升级到最新版。
 
 
 ## 环境
 
-- scala 2.13.7
+- scala 2.12.x/2.13.x
 - java 8/11
 - redis
-- mysql 8.0
+- mysql 8.x
 
 ## 技术栈
 
@@ -78,9 +78,9 @@ zim 初衷是学习从零开发一个纯 Scala 式的应用程序，为何选择
 
 ## 如何参与贡献
 
-1. 拉下代码 `git clone gh repo clone bitlap/zim`，并执行`sbt compile` 编译。（第一次构建不要使用IDE的build）
-2. 参考issue，选择自己能解决的，修改代码并编写单元测试
-3. 调试代码，参考 "运行环境准备"
+1. fork一份 zim 到自己仓库，拉下代码后，在`zim/`目录里面执行`sbt compile` 编译。（第一次构建不要使用IDE的build）
+2. 查看[issue](https://github.com/bitlap/zim/issues)列表，选择一些自己能解决的issue，编写代码和单元测试
+3. 调试代码，参考 `运行环境准备`
 4. 使用`sbt compile` 自动格式化代码
 5. 使用`sbt scalafmtCheckAll` 检查格式化 
 6. 使用`sbt coverage test coverageReport` 执行测试
