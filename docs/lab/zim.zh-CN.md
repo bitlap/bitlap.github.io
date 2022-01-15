@@ -5,8 +5,9 @@ nav:
   order: 1
 ---
 
+<img align="right" width="20%" height="10%" src="./images/group.JPG" alt="https://bitlap.org">
 
-[zim]((https://github.com/bitlap/zim)) 是一个基于 scala 和 zio 实现的 web im。
+> 感兴趣的可关注一下，也可以一起开发。本项目旨在学习。  交流群 =====>
 
 
 # zim
@@ -71,10 +72,11 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 * 使用`resources/sql/data.sql`初始化数据（可选）
 * 启动Main方法`ZimServer.scala#run`
 
-### 上手接口
+### 如何上手
 
 - swagger-ui 接口文档： `http://localhost:9000/api/v1.0/docs`
-- 心跳接口：`http://localhost:9000/api/v1.0/health`
+- 最简单的心跳接口：`http://localhost:9000/api/v1.0/health`
+- 单元测试
 
 ## 如何参与贡献
 
