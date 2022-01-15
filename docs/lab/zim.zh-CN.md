@@ -5,7 +5,7 @@ nav:
   order: 1
 ---
 
-<img align="right" width="20%" height="10%" src="./images/group.JPG" alt="https://bitlap.org">
+<img align="right" width="20%" height="10%" src="/images/group.JPG" alt="https://bitlap.org">
 
 > 感兴趣的可关注一下，也可以一起开发。本项目旨在学习。  交流群 =====>
 
