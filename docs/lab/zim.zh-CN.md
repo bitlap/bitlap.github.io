@@ -26,15 +26,15 @@ zim 名字取自 zio 和 IM 的结合体。
 - zio-interop-reactivestreams
 - zio-logging
 - zio-test
-- zio-crypto
-- zio-redis
-- zio-actors
+- zio-crypto 实验性
+- zio-redis 实验性
+- zio-actors 实验性
 
 zim 同时会选用简单易用的 scala 框架或库，尽可能不使用任何 java 库和类型系统来构建程序。
 
 zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择 zio 全家桶？这是因为 zio 相对其他的来说较容易也较完善。
 
-基于时间考虑，zim 目前不会直接使用 zio 2.x 和 akka typed actor，但大概率后续会升级到最新版。
+基于学习考虑，zim 目前直接使用了一些实验性库。
 
 
 ## 环境
@@ -50,12 +50,12 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 - 平台：jvm
 - 前端：layim 3.0
 - 主体框架：zio 1.x
-- API：akka-http (classic)
+- API：akka-http
 - API文档化工具：tapir
 - 数据库：redis、mysql
 - 数据操作：scalikejdbc-stream
 - 序列化：circe
-- WebSocket：akka-http (classic)
+- WebSocket：akka-http、akka-actor-typed
 - 邮件：simple-java-mail
 - 配置：config
 - 构建工具：sbt
@@ -76,6 +76,7 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 
 - swagger-ui 接口文档： `http://localhost:9000/api/v1.0/docs`
 - 最简单的心跳接口：`http://localhost:9000/api/v1.0/health`
+- websocket接口：`ws://127.0.0.1:9000/websocket?uid=1`
 - 单元测试
 
 ## 如何参与贡献
