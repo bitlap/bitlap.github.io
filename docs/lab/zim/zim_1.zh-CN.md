@@ -104,9 +104,9 @@ Layer可以理解为是一个模块，模块内部维护自己的逻辑，对外
     apiConfigurationLayer ++ akkaActorSystemLayer ++ akkaHttpConfigurationLayer
 ```
 
-其中`TaskLayer[A]`和`Task[A]`是同样的道理，只不过`TaskLayer`是Layer，而`Task`是`IO`。
+其中`TaskLayer[A]`和`Task[A]`是同样的道理，只不过`TaskLayer`是`Layer`类型，而`Task`是`IO`类型。
 
-> 甚至可以把Layer当做一个拼图的一部分。最终拼完的就是ZimEnv。
+> 甚至可以把Layer当做一个拼图的一部分。最终拼完的就是ZimEnv。通常，定义多个可组合可重复的Layer，可以方便的去构建一个更加复杂的环境（Layer），供系统运行使用。同时，环境声明对使用者而言是类型安全的。
 
 ## zio常见函数介绍
 

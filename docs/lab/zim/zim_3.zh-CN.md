@@ -4,4 +4,4 @@ nav:
   path: /zh-CN/lab/zim
 ---
 
-# zio1.x的依赖管理 2
+# zio1.x的依赖注入 2
