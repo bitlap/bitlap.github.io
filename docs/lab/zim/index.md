@@ -1,8 +1,7 @@
 ---
-toc: menu
+toc: content
 nav:
-  path: /lab/zim
-  order: 1
+  path: /zh-CN/lab/zim
 ---
 
 
