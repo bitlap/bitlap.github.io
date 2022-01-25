@@ -18,9 +18,9 @@ nav:
 
 ## 如何上手
 
-- swagger-ui 接口文档： `http://localhost:9000/api/v1.0/docs`
+- swagger-ui 接口文档： `http://localhost:9000/api/v1.0/docs`（不含需要鉴权的接口）
 - 最简单的心跳接口：`http://localhost:9000/api/v1.0/health`
-- websocket接口：`ws://127.0.0.1:9000/websocket?uid=1` （不含需要鉴权的接口）
+- websocket接口：`ws://127.0.0.1:9000/websocket?uid=1` 
 - 单元测试
 
 ## 如何参与贡献
