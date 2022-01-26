@@ -1,4 +1,5 @@
 ---
+order: -1
 toc: content
 nav:
   path: /zh-CN/lab/zim
@@ -7,18 +8,15 @@ nav:
 [![Build](https://github.com/bitlap/zim/actions/workflows/ScalaCI.yml/badge.svg?branch=master)](https://github.com/bitlap/zim/actions/workflows/ScalaCI.yml)
 [![codecov](https://codecov.io/gh/bitlap/zim/branch/master/graph/badge.svg?token=V95ZMWUUCE)](https://codecov.io/gh/bitlap/zim)
 
-
 <img align="right" width="20%" height="10%" src="/images/group.JPG" alt="https://bitlap.org">
 
-> 感兴趣的可关注一下，也可以一起开发。本项目旨在学习。  交流群 =====>
-
+> 感兴趣的可关注一下，也可以一起开发。本项目旨在学习。 交流群 =====>
 
 # zim
 
 zim 名字取自 zio 和 IM 的结合体。
 
 > [zio](https://github.com/zio/zio) 是一个 scala 中用于异步和并发编程的类型安全、可组合的库
-
 
 > IM 为即时通信系统
 
@@ -42,15 +40,13 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 
 基于学习考虑，zim 目前直接使用了一些实验性库。
 
-
 ## 模块
 
-- `zim-auth` zim的登录鉴权，目前由cookie实现并对外提供“鉴权缓存”函数，具体实现由`zim-server`完成。
-- `zim-cache` zim的缓存，目前由zio-redis实现。
-- `zim-domain` 所有领域对象，包括数据库、http、websocket等，还包括circe和scalikejdbc所需的隐式对象。
-- `zim-server` zim服务端的主要实现，包括zio依赖管理、领域对象的crud实现、基于akka-http的api实现、基于tapir的api具体实现。
-- `zim-tapir` zim api的端点描述定义，具体实现由`zim-server`完成。
-
+- `zim-auth` zim 的登录鉴权，目前由 cookie 实现并对外提供“鉴权缓存”函数，具体实现由`zim-server`完成。
+- `zim-cache` zim 的缓存，目前由 zio-redis 实现。
+- `zim-domain` 所有领域对象，包括数据库、http、websocket 等，还包括 circe 和 scalikejdbc 所需的隐式对象。
+- `zim-server` zim 服务端的主要实现，包括 zio 依赖管理、领域对象的 crud 实现、基于 akka-http 的 api 实现、基于 tapir 的 api 具体实现。
+- `zim-tapir` zim api 的端点描述定义，具体实现由`zim-server`完成。
 
 ## 环境
 
@@ -66,7 +62,7 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 - 前端：layim 3.0
 - 主体框架：zio 1.x
 - API：akka-http
-- API文档化工具：tapir
+- API 文档化工具：tapir
 - 数据库：redis、mysql
 - 数据操作：scalikejdbc-stream
 - 序列化：circe
@@ -78,17 +74,17 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 ## 详细目录
 
 - [x] 如何快速开始
-- [x] zio基本介绍
-- [x] zio1.x依赖注入 1
-- [ ] zio1.x依赖注入 2
-- [ ] zio流处理介绍
-- [ ] zio如何与scalikejdc-stream集成
-- [ ] zio如何与akka-stream 集成
-- [ ] zio-actors如何与akka-actor通信
-- [ ] zio如何构建一个可重用模块
-- [ ] zio应用如何测试
-- [ ] zio-scheam的巧妙用途
-- [ ] 什么是tapir
-- [ ] 如何编写tapir应用
-- [ ] 什么是akka-http
-- [ ] 如何编写akka-http接口
+- [x] zio 基本介绍
+- [x] zio1.x 依赖注入 1
+- [ ] zio1.x 依赖注入 2
+- [ ] zio 流处理介绍
+- [ ] zio 如何与 scalikejdc-stream 集成
+- [ ] zio 如何与 akka-stream 集成
+- [ ] zio-actors 如何与 akka-actor 通信
+- [ ] zio 如何构建一个可重用模块
+- [ ] zio 应用如何测试
+- [ ] zio-scheam 的巧妙用途
+- [ ] 什么是 tapir
+- [ ] 如何编写 tapir 应用
+- [ ] 什么是 akka-http
+- [ ] 如何编写 akka-http 接口
