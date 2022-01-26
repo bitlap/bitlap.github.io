@@ -109,7 +109,7 @@ TODO
 
 TODO
 
-## 与 scalikejdc-streams 集成
+## 与 scalikejdbc-streams 集成
 
 需要的所有依赖：
 
