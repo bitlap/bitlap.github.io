@@ -78,17 +78,17 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 ## 详细目录
 
 - [x] 如何快速开始
-- [x] zio 基本介绍
-- [ ] zio 1.x依赖注入 1
-- [ ] zio 1.x依赖注入 2
-- [ ] zio 流处理介绍
-- [ ] zio 如何与 scalikejdc stream 集成
-- [ ] zio 如何与 akka stream 集成
-- [ ] zio-actors 如何与 akka actor 通信
-- [ ] zio 如何构建一个可重用模块（类似springboot的starter）
-- [ ] zio 应用如何测试
-- [ ] zio-scheam 的巧妙用途
-- [ ] 什么是 tapir
-- [ ] 如何编写 tapir 应用
-- [ ] 什么是 akka-http
-- [ ] 如何编写 akka-http 接口
+- [x] zio基本介绍
+- [x] zio1.x依赖注入 1
+- [ ] zio1.x依赖注入 2
+- [ ] zio流处理介绍
+- [ ] zio如何与scalikejdc-stream集成
+- [ ] zio如何与akka-stream 集成
+- [ ] zio-actors如何与akka-actor通信
+- [ ] zio如何构建一个可重用模块
+- [ ] zio应用如何测试
+- [ ] zio-scheam的巧妙用途
+- [ ] 什么是tapir
+- [ ] 如何编写tapir应用
+- [ ] 什么是akka-http
+- [ ] 如何编写akka-http接口
