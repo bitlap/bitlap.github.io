@@ -149,7 +149,7 @@ TODO
     }
     for {
       groupList <- groupListStream
-      // 嵌套数据结构，必须从流中获取所有元素，次数要先计算，最后再从效果构建新的流。其实没有使用到流的特性 个人认为是API设计本身不太合理。
+      // 嵌套数据结构，必须从流中获取所有元素，此时要先计算，最后再从效果构建新的流。其实没有使用到流的特性 个人认为是API设计本身不太合理。
       users <- ZStream.fromEffect(userRepository.findUsersByFriendGroupIds(groupList.id).runCollect) 
       _ <- LogUtil.infoS(s"findFriendGroupsById uid=>$uid, groupList=>$groupList, users=>$users")
     } yield groupList.copy(list = users.toList)
