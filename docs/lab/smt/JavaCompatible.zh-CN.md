@@ -6,7 +6,7 @@ nav:
 
 ## @JavaCompatible
 
-注解`@JavaCompatible` 用于为样例类生成无参构造函数和get/set方法。这在同时使用Scala 样例类和Java库（如myabtis和springboot）时非常有用。
+注解`@JavaCompatible` 用于为样例类生成无参构造函数和get/set方法。这在同时使用Scala 样例类和Java库（如mybatis和springboot）时非常有用。
 
 **说明**
 
