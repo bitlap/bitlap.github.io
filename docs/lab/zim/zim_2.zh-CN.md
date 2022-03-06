@@ -4,7 +4,7 @@ nav:
   path: /zh-CN/lab/zim
 ---
 
-# zio1.x的依赖注入 1
+# zio1.x的依赖注入1.0
 
 > 即 Module Pattern 1.0
 
@@ -12,11 +12,11 @@ nav:
 
 让我们通过编写一个`Logging`服务开始学习这种模式：
 
-1. Bundling 捆绑 —— 定义一个为模块提供名称的对象，这可以（不一定）是一个包对象。我们创建一个`logging`对象，所有的定义和实现都将包含在这个对象中。
-2. Service Definition 服务定义 —— 然后我们创建`Logging`伴生对象。在伴生对象中，我们使用名为`Service`的`trait`来编写服务的定义。特质是我们编写服务的方式。服务可以是与具有单一责任的一个概念相关的所有东西。
-3. Service Implementation 服务实现 —— 之后，我们通过创建一个新服务（匿名对象）来实现我们的服务，然后使用`ZLayer.succeed`构造函数将整个实现提升为`ZLayer`数据类型。
-4. Defining Dependencies 定义依赖关系 —— 如果我们的服务依赖于其他服务，我们应该使用`ZLayer.fromService`和`ZLayer.fromServices`这样的构造函数。
-5. Accessor Methods  访问器方法 —— 最后，为了创建更符合人体工程学的 API，最好为我们所有的服务方法编写访问器方法。
+1. __Bundling__ 捆绑 —— 定义一个为模块提供名称的对象，这可以（不一定）是一个包对象。我们创建一个`logging`对象，所有的定义和实现都将包含在这个对象中。
+2. __Service Definition__ 服务定义 —— 然后我们创建`Logging`伴生对象。在伴生对象中，我们使用名为`Service`的`trait`来编写服务的定义。特质是我们编写服务的方式。服务可以是与具有单一责任的一个概念相关的所有东西。
+3. __Service Implementation__ 服务实现 —— 之后，我们通过创建一个新服务（匿名对象）来实现我们的服务，然后使用`ZLayer.succeed`构造函数将整个实现提升为`ZLayer`数据类型。
+4. __Defining Dependencies__ 定义依赖关系 —— 如果我们的服务依赖于其他服务，我们应该使用`ZLayer.fromService`和`ZLayer.fromServices`这样的构造函数。
+5. __Accessor Methods__  访问器方法 —— 最后，为了创建更符合人体工程学的 API，最好为我们所有的服务方法编写访问器方法。
 
 
 > 效果 = effect = 副作用
@@ -74,14 +74,14 @@ object logging {
 }
 ```
 
-这就是 ZIO 服务的创建方式。当我们使用`log`方法时就会被要求必须提供`Logging` layer。
+这就是ZIO服务的创建方式。当我们使用`log`方法时就会被要求必须提供`Logging` layer。
 
 在编写应用程序时，我们并不关心将哪个实现版本的`Logging`服务注入到我们的应用程序中，最终，它将通过诸如`provide`之类的方法提供。
 
 ## 在zim中的应用
 
 介绍了官网基本例子来自己实现一个真实需求。现在需要实现一个redis服务，使用[zio-redis](https://github.com/zio/zio-redis)
-作为客户端为我们的[zim](https://github.com/bitlap/zim)定义一个`redisCacheService`：
+作为客户端为我们的[zim](https://github.com/bitlap/zim) 定义一个`redisCacheService`：
 
 ```scala
 /**
@@ -178,4 +178,4 @@ object ZimServer extends ZimServiceConfiguration with zio.App {
     RedisCacheConfiguration.live >>> RedisCacheService.live
 ```
 
-这表示，我们将redis配置的layer传递给redis服务的layer，以构建出新的layer。由于配置不再依赖其他layer，所以最终我们的layer是能构建出来的且不再需要其他依赖的。(可达的)
+这表示，我们将redis配置的layer传递给redis服务的layer，以构建出新的layer。由于配置不再依赖其他layer，所以最终我们的layer是能构建出来的且不再需要其他依赖的。(单向的)
