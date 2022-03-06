@@ -4,7 +4,7 @@ nav:
   path: /zh-CN/lab/zim
 ---
 
-# ZIO中的依赖注入
+# zio中的依赖注入
 
 `ZLayer`结合ZIO环境，让我们可以使用ZIO进行依赖注入。依赖注入有两个部分：
 1. __构建依赖图__
@@ -16,11 +16,11 @@ ZIO对依赖注入问题有完整的解决方案。它通过使用`ZLayer`的组
 
 ZIO管理应用程序组件之间依赖关系的方式为我们提供了组合性方面的强大功能，并提供了轻松更改不同实现的能力。这在测试和mock期间特别有用。
 
-通过使用ZLayer和ZIO，我们可以解决依赖注入中的传播和连接问题。但是没有必要使用它，我们仍然可以使用Guice和ZIO之类的东西，或者我们可能喜欢使用[izumi distage](https://izumi.7mind.io/distage/index.html) 解决方案进行依赖注入。
+通过使用ZLayer和ZIO，我们可以解决依赖注入中的传播和连接问题。但是并不是必须使用它，我们仍然可以使用Guice with ZIO之类的东西，或者我们可能喜欢使用[izumi distage](https://izumi.7mind.io/distage/index.html) 解决方案进行依赖注入。
 
 ## 构建依赖图
 
-假设我们有几个服务及其依赖项，我们需要一种方法来组合和连接这些依赖项并创建应用程序的依赖关系图。`ZLayer`是针对这个问题的ZIO解决方案，它允许我们通过水平和垂直组合 __层__ 来构建整个应用程序依赖关系图。有关如何组合图层的更多信息，请参见 [ZLayer](https://zio.dev/next/datatypes/contextual/zlayer) 页面。
+假设我们有几个服务及其依赖项，我们需要一种方法来组合和连接这些依赖项并创建应用程序的依赖关系图。`ZLayer`是针对这个问题的ZIO解决方案，它允许我们通过水平和垂直组合 __层__ 来构建整个应用程序依赖关系图。有关如何组合层的更多信息，请参见 [ZLayer](https://zio.dev/next/datatypes/contextual/zlayer) 页面。
 
 ## 依赖传播
 
@@ -30,7 +30,7 @@ ZIO管理应用程序组件之间依赖关系的方式为我们提供了组合�
 
 ZIO有一些设施可以做到这一点。`ZIO#provide`是核心函数，它允许我们将`R`提供给需要`R`的效果。
 
-注意：一旦使用`provide`行为消除了结果效果类型中的环境依赖，则将由`Any`类型表示结果环境。如`URIO[Logging, Unit]`，对这个效果使用`provide`提供了Logging依赖后，则结果类型变成`URIO[Any, Unit]`，表示不再需要任何依赖了。
+注意：一旦使用`provide`行为消除了结果效果类型中的环境依赖，则将由`Any`类型表示结果环境。如`URIO[Logging, Unit]`，对这个效果使用`provide`提供了`Logging`依赖后，则结果类型变成`URIO[Any, Unit]`，表示不再需要任何依赖了。
 
 ## 使用`provide`方法
 

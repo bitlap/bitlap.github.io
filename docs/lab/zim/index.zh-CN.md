@@ -78,7 +78,7 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 - [x] zio1.x模块模式之1.0
 - [x] zio1.x模块模式之2.0
 - [x] zio-streams、与scalikejdbc-streams的集成
-- [x] zio中的依赖注入说明
+- [x] zio中的依赖注入
 - [ ] zio-streams与akka-streams的集成
 - [ ] zio-actors、与akka-actor通信的集成
 - [ ] zio如何构建一个可重用模块

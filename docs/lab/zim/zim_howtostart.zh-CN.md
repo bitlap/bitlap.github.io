@@ -31,5 +31,6 @@ nav:
 3. 调试代码，参考 `运行环境准备`
 4. 使用`sbt compile` 自动格式化代码
 5. 使用`sbt scalafmtCheckAll` 检查格式化
-6. 使用`sbt coverage test coverageReport` 执行测试
-7. 创建 pull request
+6. 使用`sbt headerCheckAll` 检查文件头
+7. 使用`sbt coverage test coverageReport` 执行测试
+8. 创建 pull request
