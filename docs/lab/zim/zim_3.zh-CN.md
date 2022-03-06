@@ -4,7 +4,7 @@ nav:
   path: /zh-CN/lab/zim
 ---
 
-# zio1.x的依赖注入2.0
+# zio1.x模块模式之2.0
 
 > 即 Module Pattern 2.0
 
@@ -56,12 +56,11 @@ object Logging {
 }
 ```
 
-很简单！ ZIO 鼓励我们遵循面向对象编程的一些最佳实践。所以它不需要我们抛弃所有面向对象的知识。
+很简单！ ZIO鼓励我们遵循面向对象编程的一些最佳实践。所以它不需要我们抛弃所有面向对象的知识。
 
 ## 在zim中的应用
 
-介绍了官网基本例子来自己实现一个真实需求。现在需要实现一个`WsService`服务，使用[zio-redis](https://github.com/zio/zio-redis)
-作为客户端为我们的[zim](https://github.com/bitlap/zim) 定义一个`WsService`：
+介绍了官网基本例子来自己实现一个真实需求。现在需要实现一个`WsService`服务：
 
 ```scala
 trait WsService {

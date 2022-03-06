@@ -4,7 +4,7 @@ nav:
   path: /zh-CN/lab/zim
 ---
 
-# zio1.x的依赖注入1.0
+# zio1.x模块模式之1.0
 
 > 即 Module Pattern 1.0
 

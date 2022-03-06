@@ -75,14 +75,15 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 
 - [x] 如何快速开始
 - [x] zio基本介绍
-- [x] zio1.x依赖注入 1
-- [ ] zio1.x依赖注入 2
+- [x] zio1.x模块模式之1.0
+- [x] zio1.x模块模式之2.0
 - [x] zio-streams、与scalikejdbc-streams的集成
+- [x] zio中的依赖注入说明
 - [ ] zio-streams与akka-streams的集成
 - [ ] zio-actors、与akka-actor通信的集成
 - [ ] zio如何构建一个可重用模块
 - [ ] zio应用如何测试
-- [ ] zio-scheam的巧妙用途
+- [ ] zio-schema的用途
 - [ ] 什么是tapir
 - [ ] 如何编写tapir应用
 - [ ] 如何编写akka-http接口
