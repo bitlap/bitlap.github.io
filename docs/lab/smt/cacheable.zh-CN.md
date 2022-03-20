@@ -91,3 +91,22 @@ def updateStreamFunction1(id: Int, key: String): ZStream[Any, Throwable, String]
    ZStream.fromEffect(ZIO.effect(s"hello world--$id-$key-${Random.nextInt()}"))
 }
 ```
+
+## 如何使用样例类
+
+```scala
+case class CacheValue(i: Int)
+
+object CacheValue {
+    // 必须
+    implicit val cacheValueSchema: Schema[CacheValue] = DeriveSchema.gen[CacheValue]
+}
+@cacheable
+def readEntityFunction(id: Int, key: String): ZIO[Any, Throwable, CacheValue] = {
+    ZIO.effect(CacheValue(Random.nextInt()))
+}
+@cacheEvict
+def updateEntityFunction(id: Int, key: String): ZIO[Any, Throwable, CacheValue] = {
+    ZIO.effect(CacheValue(Random.nextInt()))
+}
+```
