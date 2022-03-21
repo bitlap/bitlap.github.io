@@ -120,7 +120,7 @@ def updateStreamFunction1(id: Int, key: String): ZStream[Any, Throwable, String]
 ```scala
 case class CacheValue(i: Int)
 object CacheValue {
-    // 必须（caffeine缓存不用，但是也要定义为了API一致性）
+    // Redis需要（caffeine缓存不用）
     implicit val cacheValueSchema: Schema[CacheValue] = DeriveSchema.gen[CacheValue]
 }
 @cacheable
