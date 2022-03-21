@@ -109,7 +109,7 @@ def updateFunction(id: Int, key: String): ZIO[Any, Throwable, String] = {
 // values的值必须是与updateStreamFunction1在一个密闭类中的方法，否则编译不过
 // values值为空时，清除以当前类名为前缀的所有缓存：删除哪些缓存？key=className-xx,className-yy,以此类推
 // @cacheEvict注解的参数顺序不能变
-@cacheEvict(local = true, values = Seq("readStreamFunction1"))
+@cacheEvict(local = true, values = List("readStreamFunction1"))
 def updateStreamFunction1(id: Int, key: String): ZStream[Any, Throwable, String] = {
    ZStream.fromEffect(ZIO.effect(s"hello world--$id-$key-${Random.nextInt()}"))
 }
