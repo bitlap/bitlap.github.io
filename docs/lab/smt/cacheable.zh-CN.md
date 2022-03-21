@@ -24,8 +24,8 @@ nav:
       "com.typesafe" % "config" % <VERSION>,
       "com.github.ben-manes.caffeine" % "caffeine" % <VERSION>, // 本地缓存实现
       "dev.zio" %% "zio" % <VERSION>,
-      "dev.zio" %% "zio-schema" % <VERSION>,
-      "dev.zio" %% "zio-schema-protobuf" % <VERSION>
+      "dev.zio" %% "zio-schema" % <VERSION>, // redis实现需要
+      "dev.zio" %% "zio-schema-protobuf" % <VERSION> // redis实现需要
     ```
 
 ## 配置缓存
