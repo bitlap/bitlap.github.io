@@ -18,15 +18,16 @@ nav:
 ## 添加依赖
 
 - 参阅[README_CN#如何使用](../README_CN.md)如何添加依赖。
-   1. 确保类路径有以下依赖：
-   ```
-      "dev.zio" %% "zio-redis" % <VERSION>, // redis实现
-      "com.typesafe" % "config" % <VERSION>,
-      "com.github.ben-manes.caffeine" % "caffeine" % <VERSION>, // 本地缓存实现
-      "dev.zio" %% "zio" % <VERSION>,
-      "dev.zio" %% "zio-schema" % <VERSION>, // redis实现需要
-      "dev.zio" %% "zio-schema-protobuf" % <VERSION> // redis实现需要
-    ```
+```scala
+// 如果需要使用cacheable module，则引入下面模块 (不支持 Scala2.11.x)
+// 内部包含的依赖: zio, zio-streams, zio-logging
+"org.bitlap" %% "smt-cacheable-core" % "<VERSION>"
+// 根据需要导入下面的具体实现
+// 1.本地缓存, 内部包含的依赖: config, caffeine
+"org.bitlap" %% "smt-cacheable-caffeine" % "<VERSION>"
+// 2.分布式缓存, 内部包含的依赖: zio-redis, config, zio-schema, 可选的 (zio-schema-protobuf,zio-schema-derivation用于样例类序列化)
+"org.bitlap" %% "smt-cacheable-redis" % "<VERSION>"
+```
 
 ## 配置缓存
 
@@ -55,9 +56,9 @@ caffeine {
 
 ```scala
 // 注意： 方法的参数用于持久化存储的field，故参数必须都已经重写了`toString`方法
-// 导入memory的实现则表示使用caffeine
+// 导入caffeine的实现则表示使用caffeine
 // 导入redis的实现·import _root_.org.bitlap.cacheable.redis.Implicits._·
-import _root_.org.bitlap.cacheable.memory.Implicits._
+import _root_.org.bitlap.cacheable.caffeine.Implicits._
 def readStreamFunction(id: Int, key: String): ZStream[Any, Throwable, String] = {
   val $result = ZStream.fromEffect(ZIO.effect("hello world" + Random.nextInt()))
   Cache($result)("UseCaseExample-readStreamFunction", List(id, key)) // "UseCaseExample-readStreamFunction" is hash key
@@ -74,7 +75,7 @@ def readFunction(id: Int, key: String): ZIO[Any, Throwable, String] = {
 > 使用hash存储 key=className-methodName
 
 ```scala
-@cacheable // 默认使用`import _root_.org.bitlap.cacheable.memory.Implicits._`
+@cacheable // 默认使用`import _root_.org.bitlap.cacheable.caffeine.Implicits._`
 def readStreamFunction(id: Int, key: String): ZStream[Any, Throwable, String] = {
   ZStream.fromEffect(ZIO.effect(s"hello world--$id-$key-${Random.nextInt()}"))
 }
@@ -90,7 +91,7 @@ def readStreamFunction(id: Int, key: String): ZStream[Any, Throwable, String] = 
 
 ```scala
 // 注意： 因为缓存的key是类名+方法名 filed是方法参数，所以该注解将删除所有key的数据，相当于spring的@CacheEvict注解设置allEntries=true
-import _root_.org.bitlap.cacheable.memory.Implicits._
+import _root_.org.bitlap.cacheable.caffeine.Implicits._
 def updateStreamFunction(id: Int, key: String): ZStream[Any, Throwable, String] = {
    val $result = ZStream.fromEffect(ZIO.effect("hello world" + Random.nextInt()))
    // 指定要删除哪些查询方法的缓存？key=className-readFunction1,className-readFunction2
