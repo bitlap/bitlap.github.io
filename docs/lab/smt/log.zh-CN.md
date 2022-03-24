@@ -10,8 +10,7 @@ nav:
 
 **说明**
 
-- `verbose` 指定是否开启详细编译日志。可选，默认`false`。
-- `logType` 指定需要生成的`log`的类型。可选，默认`io.github.dreamylost.logs.LogType.JLog`。
+- `logType` 指定需要生成的`log`的类型。可选，默认`org.bitlap.tools.logs.LogType.JLog`。
   - `LogType.JLog` 使用 `java.util.logging.Logger`
   - `LogType.Log4j2` 使用 `org.apache.logging.log4j.Logger`
   - `LogType.Slf4j` 使用 `org.slf4j.Logger`
@@ -22,11 +21,11 @@ nav:
 **示例**
 
 ```scala
-@log(verbose = true) class TestClass1(val i: Int = 0, var j: Int) {
+@log class TestClass1(val i: Int = 0, var j: Int) {
   log.info("hello")
 }
 
-@log(verbose=true, logType=LogType.Slf4j)
+@log(logType=LogType.Slf4j)
 class TestClass6(val i: Int = 0, var j: Int) {
   log.info("hello world")
 }

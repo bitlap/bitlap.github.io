@@ -10,7 +10,6 @@ nav:
 
 **说明**
 
-- `verbose` 指定是否开启详细编译日志。可选，默认`false`。
 - `excludeFields` 指定是否需要排除不需要用于`equals`和`hashCode`方法的字段。可选，默认空（class 内部所有非`protected [this]`和`private [this]`的`var、val`字段都将被应用于生成这两个方法）。
 - `equals`和`hashCode`方法均会被超类影响，`canEqual`使用`isInstanceOf`，有些人在实现时，使用的是`this.getClass == that.getClass`。
 - 采用简单 hashCode 算法，父类的 hashCode 是直接被累加的。该算法也是`case class`所使用的。
@@ -20,7 +19,7 @@ nav:
 **示例**
 
 ```scala
-@equalsAndHashCode(verbose = true)
+@equalsAndHashCode
 class Person(var name: String, var age: Int)
 ```
 

@@ -10,7 +10,6 @@ The `@jacksonEnum` annotation is used to provide `Jackson` serialization support
 
 **Note**
 
-- `verbose` Whether to enable detailed log. default is `false`.
 - `nonTypeRefers` Specifies the enumeration type of the `TypeReference` subclass of `Jackson` that does not need to be created. default is `Nil`.
 - Support `case class` and `class`.
 - If the enumeration type has subclasses of `TypeReference`, no new subclasses will be generated,

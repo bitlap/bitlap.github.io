@@ -10,7 +10,6 @@ The `@apply` annotation is used to generate `apply` method for primary construct
 
 **Note**
 
-- `verbose` Whether to enable detailed log.
 - Only support `class`.
 - Only support **primary construction**.
 
