@@ -10,7 +10,7 @@ nav:
 
 **说明**
 
-- `logType` 指定需要生成的`log`的类型。可选，默认`io.github.dreamylost.logs.LogType.JLog`。
+- `logType` 指定需要生成的`log`的类型。可选，默认`org.bitlap.tools.logs.LogType.JLog`。
   - `LogType.JLog` 使用 `java.util.logging.Logger`
   - `LogType.Log4j2` 使用 `org.apache.logging.log4j.Logger`
   - `LogType.Slf4j` 使用 `org.slf4j.Logger`
