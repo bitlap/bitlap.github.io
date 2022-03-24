@@ -4,47 +4,83 @@ nav:
   path: /lab/smt
 ---
 
-<img align="right" width="30%" height="30%" src="/images/smt.png" alt="https://dreamylost.cn"/>
+<img align="right" width="20%" height="30%" src="/images/smt.png" alt="https://bitlap.org"/>
 
-# [scala-macro-tools](https://github.com/jxnu-liguobin/scala-macro-tools)
+# scala-macro-tools
 
-[![Build](https://github.com/jxnu-liguobin/scala-macro-tools/actions/workflows/ScalaCI.yml/badge.svg)](https://github.com/jxnu-liguobin/scala-macro-tools/actions/workflows/ScalaCI.yml)
-[![codecov](https://codecov.io/gh/jxnu-liguobin/scala-macro-tools/branch/master/graph/badge.svg?token=IA596YRTOT)](https://codecov.io/gh/jxnu-liguobin/scala-macro-tools)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.jxnu-liguobin/scala-macro-tools_2.13.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.jxnu-liguobin%22%20AND%20a:%22scala-macro-tools_2.13%22)
-[![Version](https://img.shields.io/jetbrains/plugin/v/17202-scala-macro-tools)](https://plugins.jetbrains.com/plugin/17202-scala-macro-tools)
+| Project Stage | CI              | Codecov                                   |
+| ------------- | --------------- | ----------------------------------------- |
+| ![Stage]      | ![CI][Badge-CI] | [![codecov][Badge-Codecov]][Link-Codecov] |
 
-## Motivation
+| Scaladex                                                                    | Jetbrains Plugin                              | Nexus Snapshots                                                  |
+| --------------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------- |
+| [![scala-macro-tools Scala version support][Badge-Scaladex]][Link-Scaladex] | [![Version][Badge-Jetbrains]][Link-Jetbrains] | [![Sonatype Nexus (Snapshots)][Badge-Snapshots]][Link-Snapshots] |
+
+Motivation
+--
 
 Learn Scala macro and abstract syntax tree.
 
 > The project is currently experimental
 
-## Environment
+[中文说明](./README_CN.md) | [English](./README.md)
 
-- It is compiled in Java 8, 11
-- It is compiled in Scala 2.11.x ~ 2.13.x
+# Environment
 
-## Features
+- Compile passed in Java 8、11
+- Compile passed in Scala 2.11.12、2.12.14、2.13.6
+
+# Module Features
+
+## `tools`
 
 - `@toString`
 - `@json`
 - `@builder`
-- `@synchronized`
 - `@log`
 - `@apply`
 - `@constructor`
 - `@equalsAndHashCode`
 - `@jacksonEnum`
 - `@elapsed`
+- `@javaCompatible`
+- `ProcessorCreator`
 
 > The intellij plugin named `Scala-Macro-Tools` in marketplace.
 
-## How to use
+## `cacheable-core`
+
+A cache like Spring `@Cacheable` and `@cacheEvict` based on zio. It has no implementation of storage media. 
+
+- `@cacheable` / `Cache.apply`
+- `@cacheEvict` / `Cache.evict`
+
+## `cacheable-caffeine`
+
+A memory cache based on zio and caffeine. It needs `cacheable-core` module.
+
+## `cacheable-redis`
+
+A distributed cache based on zio and zio-redis. It needs `cacheable-core` module.
+
+# Document
+
+[https://bitlap.org/lab/smt](https://bitlap.org/lab/smt)
+
+# How to use
 
 Add library dependency
 
 ```scala
-"io.github.jxnu-liguobin" %% "scala-macro-tools" % "<VERSION>"
+"org.bitlap" %% "smt-tools" % "<VERSION>" // named smt-tools since 0.4.0 
+
+// when you need cacheable module (not support Scala 2.11.x)
+// include dependencies: zio,zio-streams,zio-logging
+"org.bitlap" %% "smt-cacheable-core" % "<VERSION>" 
+// local cache, include dependencies: config, caffeine
+"org.bitlap" %% "smt-cacheable-caffeine" % "<VERSION>" 
+// distributed cache, include dependencies: zio-redis,config,zio-schema, optional (zio-schema-protobuf,zio-schema-derivation for case class)
+"org.bitlap" %% "smt-cacheable-redis" % "<VERSION>"
 ```
 
 The artefacts have been uploaded to Maven Central. Importing the library into your build system (e.g gradle, sbt), is not enough. You need to follow an extra step.
@@ -63,3 +99,15 @@ If that doesn't work, google for alternatives.
 
 In version scala`2.13.x`, the functionality of macro paradise has been included in the scala compiler directly. However,
 you must still enable the compiler flag `-Ymacro-annotations`.
+
+[Stage]: https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg
+[Badge-CI]: https://github.com/bitlap/scala-macro-tools/actions/workflows/ScalaCI.yml/badge.svg
+[Badge-Scaladex]: https://index.scala-lang.org/bitlap/scala-macro-tools/scala-macro-tools/latest-by-scala-version.svg?platform=jvm
+[Badge-Jetbrains]: https://img.shields.io/jetbrains/plugin/v/17202-scala-macro-tools
+[Badge-Codecov]: https://codecov.io/gh/bitlap/scala-macro-tools/branch/master/graph/badge.svg?token=IA596YRTOT
+[Badge-Snapshots]: https://img.shields.io/nexus/s/org.bitlap/smt-tools_2.13?server=https%3A%2F%2Fs01.oss.sonatype.org
+
+[Link-Jetbrains]: https://plugins.jetbrains.com/plugin/17202-scala-macro-tools
+[Link-Codecov]: https://codecov.io/gh/bitlap/scala-macro-tools
+[Link-Scaladex]: https://index.scala-lang.org/bitlap/scala-macro-tools/scala-macro-tools
+[Link-Snapshots]: https://s01.oss.sonatype.org/content/repositories/snapshots/org/bitlap/
