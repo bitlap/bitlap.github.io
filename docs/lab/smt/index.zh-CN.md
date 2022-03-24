@@ -1,10 +1,10 @@
 ---
 toc: content
 nav:
-  path: /lab/smt
+  path: /zh-CN/lab/smt
 ---
 
-<img align="right" width="20%" height="30%" src="img.png" alt="https://bitlap.org"/> 
+<img align="right" width="20%" height="30%" src="/images/smt.png" alt="https://bitlap.org"/> 
 
 # scala-macro-tools
 
