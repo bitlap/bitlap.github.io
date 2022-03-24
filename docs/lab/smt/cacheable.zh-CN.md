@@ -1,7 +1,7 @@
 ---
 toc: content
 nav:
-  path: /lab/smt
+  path: /zh-CN/lab/smt
 ---
 
 # cacheable
