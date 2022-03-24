@@ -10,7 +10,6 @@ The `@log` annotation does not use mixed or wrapper, but directly uses macro to 
 
 **Note**
 
-- `verbose` Whether to enable detailed log.
 - `logType` Specifies the type of `log` that needs to be generated, default is `io.github.dreamylost.logs.LogType.JLog`.
   - `LogType.JLog` use `java.util.logging.Logger`
   - `LogType.Log4j2` use `org.apache.logging.log4j.Logger`
@@ -22,11 +21,11 @@ The `@log` annotation does not use mixed or wrapper, but directly uses macro to 
 **Example**
 
 ```scala
-@log(verbose = true) class TestClass1(val i: Int = 0, var j: Int) {
+@log class TestClass1(val i: Int = 0, var j: Int) {
   log.info("hello")
 }
 
-@log(verbose=true, logType=LogType.Slf4j)
+@log(logType=LogType.Slf4j)
 class TestClass6(val i: Int = 0, var j: Int) {
   log.info("hello world")
 }
