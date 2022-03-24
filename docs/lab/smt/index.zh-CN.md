@@ -1,3 +1,9 @@
+---
+toc: content
+nav:
+  path: /lab/smt
+---
+
 <img align="right" width="20%" height="30%" src="img.png" alt="https://bitlap.org"/> 
 
 # scala-macro-tools
