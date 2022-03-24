@@ -10,7 +10,6 @@ The `@toString` annotation is used to generate `toString` for Scala classes or a
 
 **Note**
 
-- `verbose` Whether to enable detailed log.
 - `includeFieldNames` Whether to include the names of the field in the `toString`, default is `true`.
 - `includeInternalFields` Whether to include the internal fields defined within a class. Not in a primary constructor, default is `true`.
 - `callSuper` Whether to include the super's `toString`, default is `false`. Not support if super class is a trait.
