@@ -11,7 +11,6 @@ This is useful when using Scala case class and Java libraries (such as myabtis a
 
 **Note**
 
-- `verbose` Whether to enable detailed log.
 - Only support `case class`.
 
 **Example**
