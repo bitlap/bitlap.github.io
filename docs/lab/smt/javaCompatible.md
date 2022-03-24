@@ -4,9 +4,9 @@ nav:
   path: /lab/smt
 ---
 
-## @JavaCompatible
+## @javaCompatible
 
-The `@JavaCompatible` annotation to generate non-parameter constructor and get/set method for case classes. 
+The `@javaCompatible` annotation to generate non-parameter constructor and get/set method for case classes. 
 This is useful when using Scala case class and Java libraries (such as myabtis and springboot) at the same time.
 
 **Note**
@@ -21,5 +21,5 @@ class B(@BeanProperty val name: String, @BeanProperty val id: Int) //must add `@
 @JavaCompatible case class A(a: Int, b: Short, override val name: String, override val id: Int) extends B(name, id)
 
 // not inherit
-@JavaCompatible case class A(a: Int, b: Short, c: Byte, d: Double, e: Float, f: Long, g: Char, h: Boolean, i: String)
+@javaCompatible case class A(a: Int, b: Short, c: Byte, d: Double, e: Float, f: Long, g: Char, h: Boolean, i: String)
 ```
