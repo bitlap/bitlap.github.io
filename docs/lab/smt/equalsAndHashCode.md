@@ -10,7 +10,6 @@ The `@equalsAndHashCode` annotation is used to generate `equals` and `hashCode` 
 
 **Note**
 
-- `verbose` Whether to enable detailed log.
 - `excludeFields` specifies whether to exclude fields that are not required for the `equals` and `hashCode` methods. Optional,
   default is `Nil` (all `var` and `val` fields **exclude `protected [this]` and `private [this]`** in the class will be used to generate the two methods).
 - Both `equals` and `hashCode` methods are affected by super classes, and `canEqual` uses `isInstanceOf` in `equals` method.
@@ -22,7 +21,7 @@ The `@equalsAndHashCode` annotation is used to generate `equals` and `hashCode` 
 **Example**
 
 ```scala
-@equalsAndHashCode(verbose = true)
+@equalsAndHashCode
 class Person(var name: String, var age: Int)
 ```
 
