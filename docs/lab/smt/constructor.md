@@ -10,7 +10,6 @@ The `@constructor` annotation is used to generate secondary constructor method f
 
 **Note**
 
-- `verbose` Whether to enable detailed log.
 - `excludeFields` Whether to exclude the specified `var` fields, default is `Nil`.
 - Only support `class`.
 - The internal fields are placed in the first bracket block if constructor is currying.
