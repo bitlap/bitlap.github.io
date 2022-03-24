@@ -10,7 +10,6 @@ nav:
 
 **说明**
 
-- `verbose` 指定是否开启详细编译日志。可选，默认`false`。
 - `includeFieldNames` 指定是否在`toString`中包含字段的名称。可选，默认`true`。
 - `includeInternalFields` 指定是否包含类内部定义的字段。它们不是在主构造函数中。可选，默认`true`。
 - `callSuper` 指定是否包含`super`的`toString`方法值。如果超级类是一种特质，则不支持。可选，默认`false`。
