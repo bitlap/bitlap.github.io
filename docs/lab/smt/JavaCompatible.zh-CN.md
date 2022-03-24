@@ -4,9 +4,9 @@ nav:
   path: /lab/smt
 ---
 
-## @JavaCompatible
+## @javaCompatible
 
-注解`@JavaCompatible` 用于为样例类生成无参构造函数和get/set方法。这在同时使用Scala 样例类和Java库（如mybatis和springboot）时非常有用。
+注解`@javaCompatible` 用于为样例类生成无参构造函数和get/set方法。这在同时使用Scala 样例类和Java库（如mybatis和springboot）时非常有用。
 
 **说明**
 
@@ -17,8 +17,8 @@ nav:
 ```scala
 // 有继承父类的
 class B(@BeanProperty val name: String, @BeanProperty val id: Int) //如果子类有重写父类的字段，必须为父类的字段添加 `@BeanProperty`
-@JavaCompatible case class A(a: Int, b: Short, override val name: String, override val id: Int) extends B(name, id)
+@javaCompatible case class A(a: Int, b: Short, override val name: String, override val id: Int) extends B(name, id)
 
 // 没有继承
-@JavaCompatible case class A(a: Int, b: Short, c: Byte, d: Double, e: Float, f: Long, g: Char, h: Boolean, i: String)
+@javaCompatible case class A(a: Int, b: Short, c: Byte, d: Double, e: Float, f: Long, g: Char, h: Boolean, i: String)
 ```
