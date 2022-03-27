@@ -33,10 +33,14 @@ zim 名字取自 zio 和 IM 的结合体。
 - zio-actors-akka-interop 实验性
 - zio-schema-derivation 实验性
 - zio-schema 实验性
+- smt-cacheable-caffeine 实验性  -- 是个类似spring的注解缓存（内存缓存）
+- zio-schema-json 实验性
 
 zim 同时会选用简单易用的 scala 框架或库，尽可能不使用任何 java 库和类型系统来构建程序。
 
 zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择 zio 全家桶？这是因为 zio 相对其他的来说较容易也较完善。
+
+目前使用的是 Scala2，其中多数组件暂不支持 Scala3，所以 zim 暂无计划升级到 Scala3。
 
 基于学习考虑，zim 目前直接使用了一些实验性库。
 
@@ -50,10 +54,10 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 
 ## 环境
 
-- scala 2.12.x/2.13.x
+- scala 2.12/2.13
 - java 8/11
-- redis
-- mysql 8.x
+- redis 4/5/6
+- mysql 8
 
 ## 技术栈
 
@@ -65,7 +69,9 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 - API 文档化工具：tapir
 - 数据库：redis、mysql
 - 数据操作：scalikejdbc-stream
+- 内存缓存：smt-cacheable-caffeine
 - 序列化：circe
+- 细化类型：refined
 - WebSocket：akka-http、akka-actor-typed
 - 邮件：simple-java-mail
 - 配置：config
