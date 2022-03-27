@@ -73,6 +73,7 @@ nav:
 
 > 在gradle，maven中，通常`smt-tools`被替换为`smt-tools_2.12`这种。其中，`2.12`表示Scala版本号。
 **使用tools模块**
+**使用tools模块**
 
 ```scala
 "org.bitlap" %% "smt-tools" % "<VERSION>" //从0.4.0开始名字改成 smt-tools 
@@ -87,10 +88,10 @@ nav:
 
 **使用redis实现的cacheable模块**
 
-> 目前不可用
+> TODO，目前不可用，无分布式锁
 
 ```scala
-// 分布式缓存, 内部包含的依赖: zio-redis, config, zio-schema, 可选的 (zio-schema-protobuf, zio-schema-derivation用于样例类序列化)
+// 分布式缓存, 内部包含的依赖: zio-redis, config, zio-schema, zio-schema-json, 可选的 (zio-schema-derivation用于样例类序列化)
 // 依赖于`smt-cacheable-core`（不支持 Scala2.11.x）
 "org.bitlap" %% "smt-cacheable-redis" % "<VERSION>"
 ```
