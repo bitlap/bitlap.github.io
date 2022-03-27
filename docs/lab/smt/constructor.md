@@ -6,23 +6,22 @@ nav:
 
 ## @constructor
 
-The `@constructor` annotation is used to generate secondary constructor method for classes, only when it has internal fields.
+`@constructor`注解用于为普通类生成辅助构造函数。仅当类有内部字段时可用。
 
-**Note**
+**说明**
 
-- `excludeFields` Whether to exclude the specified `var` fields, default is `Nil`.
-- Only support `class`.
-- The internal fields are placed in the first bracket block if constructor is currying.
-- The type of the internal field must be specified, otherwise the macro extension cannot get the type.
-  At present, only primitive types and string can be omitted. For example, `var i = 1; var j: int = 1; var k: Object = new Object()` is OK, but `var k = new object()` is not.
+- `excludeFields` 指定是否需要排除不需要用于构造函数的`var`字段。可选，默认空（所有 class 内部的`var`字段都将作为构造函数的入参）。
+- 仅支持在`class`上使用。
+- 主构造函数存在柯里化时，内部字段被放置在柯里化的第一个括号块中。（生成的仍然是柯里化的辅助构造）
+- 内部字段的类型需要显示指定，否则宏拓展无法获取到该类型。目前支持为基本类型和字符串实现省略。如`var i = 1; var j: Int = 1; var k: Object = new Object()`都是可以的，而`var k = new Object()`是不可以的。
 
-**Example**
+**示例**
 
 ```scala
-@constructor(excludeFields = Seq("c"))
+@constructor(excludeFields = Seq("c")) //排除c字段。其中，a是val的不需要手动指定，自动排除。
 class A2(int: Int, val j: Int, var k: Option[String] = None, t: Option[Long] = Some(1L)) {
   private val a: Int = 1
-  var b: Int = 1 //The default value of the field is not carried to the apply parameter, so all parameters are required.
+  var b: Int = 1 // 不携带字段的默认值到apply参数中，所以参数都是必传
   protected var c: Int = _
 
   def helloWorld: String = "hello world"
@@ -31,9 +30,9 @@ class A2(int: Int, val j: Int, var k: Option[String] = None, t: Option[Long] = S
 println(new A2(1, 2, None, None, 100))
 ```
 
-**Macro expansion code**
+**宏生成的中间代码**
 
-Only constructor
+仅构造函数部分
 
 ```scala
 def <init>(int: Int, j: Int, k: Option[String], t: Option[Long], b: Int) = {

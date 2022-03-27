@@ -2,7 +2,7 @@
 toc: content
 order: 0
 nav:
-  path: /zh-CN/lab/zim
+  path: /lab/zim
 ---
 
 # 快速开始

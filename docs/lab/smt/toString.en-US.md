@@ -1,21 +1,21 @@
 ---
 toc: content
 nav:
-  path: /zh-CN/lab/smt
+  path: /en-US/lab/smt
 ---
 
 ## @toString
 
-`@toString`注解用于为 Scala 类生成`toString`方法。
+The `@toString` annotation is used to generate `toString` for Scala classes or a `toString` with parameter names for the case classes.
 
-**说明**
+**Note**
 
-- `includeFieldNames` 指定是否在`toString`中包含字段的名称。可选，默认`true`。
-- `includeInternalFields` 指定是否包含类内部定义的字段。它们不是在主构造函数中。可选，默认`true`。
-- `callSuper` 指定是否包含`super`的`toString`方法值。如果超级类是一种特质，则不支持。可选，默认`false`。
-- 支持普通类和样例类。
+- `includeFieldNames` Whether to include the names of the field in the `toString`, default is `true`.
+- `includeInternalFields` Whether to include the internal fields defined within a class. Not in a primary constructor, default is `true`.
+- `callSuper` Whether to include the super's `toString`, default is `false`. Not support if super class is a trait.
+- Support `case class` and `class`.
 
-**示例**
+**Example**
 
 ```scala
 @toString class TestClass(val i: Int = 0, var j: Int) {
@@ -27,7 +27,7 @@ nav:
 println(new TestClass(1, 2));
 ```
 
-详细选项说明
+Detail options
 
 | includeInternalFields / includeFieldNames | false                              | true                                         |
 | ----------------------------------------- | ---------------------------------- | -------------------------------------------- |

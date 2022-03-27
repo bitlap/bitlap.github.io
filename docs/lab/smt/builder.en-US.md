@@ -1,20 +1,20 @@
 ---
 toc: content
 nav:
-  path: /zh-CN/lab/smt
+  path: /en-US/lab/smt
 ---
 
 ## @builder
 
-`@builder`注解用于为 Scala 类生成构造器模式。
+The `@builder` annotation is used to generate builder pattern for Scala classes.
 
-**说明**
+**Note**
 
-- 支持普通类和样例类。
-- 仅支持对主构造函数使用。
-- 如果该类没有伴生对象，将生成一个伴生对象来存储`builder`方法和类。
+- Support `case class` / `class`.
+- Only support for **primary constructor**.
+- If there is no companion object, one will be generated to store the `builder` class and method.
 
-**示例**
+**Example**
 
 ```scala
 @builder
@@ -24,7 +24,7 @@ val ret = TestClass1.builder().i(1).j(0).x("x").build()
 assert(ret.toString == "TestClass1(1,0,x,Some())")
 ```
 
-**宏生成的中间代码**
+**Macro expansion code**
 
 ```scala
 object TestClass1 extends scala.AnyRef {

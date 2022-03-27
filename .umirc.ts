@@ -16,11 +16,15 @@ export default defineConfig({
   // Because of using GitHub Pages
   // base: `/${repo}/`,
   // publicPath: `/${repo}/`,
+  locales: [
+    ["zh-CN", "中文"],
+    ["en-US", "English"]
+  ],
   navs: {
-    "en-US": [
+    "zh-CN": [
       // null,
       {
-        title: "Lab",
+        title: "实验室",
         children: [
           { title: "Scala-Macro-Tools", path: "/lab/smt" },
           { title: "Zim", path: "/lab/zim" }
@@ -31,13 +35,13 @@ export default defineConfig({
         path: "https://github.com/bitlap/bitlap"
       }
     ],
-    "zh-CN": [
+    "en-US": [
       // null,
       {
-        title: "实验室",
+        title: "Lab",
         children: [
-          { title: "Scala-Macro-Tools", path: "/zh-CN/lab/smt" },
-          { title: "Zim", path: "/zh-CN/lab/zim" }
+          { title: "Scala-Macro-Tools", path: "/en-US/lab/smt" },
+          { title: "Zim", path: "/en-US/lab/zim" }
         ]
       },
       {

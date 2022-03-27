@@ -5,8 +5,8 @@ hero:
   title: bitlap
   desc: A table schema-less OLAP Analytics Engine for Big Data.
   actions:
-    - text: 快速上手
-      link: /zh-CN/components/foo
+    - text: Getting Started
+      link: /components/foo
 features:
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/f093e060-726e-471c-a53e-e988ed3f560c/kj9t9sk7_w144_h144.png
     title: 飞速查询
@@ -20,7 +20,7 @@ features:
 footer: Open-source MIT Licensed | Copyright © 2022-present<br />Powered by bitlap.org
 ---
 
-## 轻松上手
+## Getting Started
 
 ```bash
 // 创建一个表

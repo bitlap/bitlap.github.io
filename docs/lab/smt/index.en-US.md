@@ -1,7 +1,7 @@
 ---
 toc: content
 nav:
-  path: /lab/smt
+  path: /en-US/lab/smt
 ---
 
 <img align="right" width="20%" height="30%" src="/images/smt.png" alt="https://bitlap.org"/>
@@ -16,20 +16,20 @@ nav:
 | --------------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------- |
 | [![scala-macro-tools Scala version support][badge-scaladex]][link-scaladex] | [![Version][badge-jetbrains]][link-jetbrains] | [![Sonatype Nexus (Snapshots)][badge-snapshots]][link-snapshots] |
 
-## 该库的目的
+## Motivation
 
-学习 Scala 宏编程（macro）和抽象语法树（ast）。
+Learn Scala macro and abstract syntax tree.
 
-> 本项目目前处于实验阶段，有建议、意见或者问题欢迎提 issue。如果本项目对你有帮助，欢迎点个 star。
+> The project is currently experimental
 
-**[中文说明](./README_CN.md) | [English](./README.md)**
+[中文说明](./README_CN.md) | [English](./README.md)
 
-# 环境
+# Environment
 
-- Java 8、11 编译通过
-- Scala 2.11.12、2.12.14、2.13.6 编译通过
+- Compile passed in Java 8、11
+- Compile passed in Scala 2.11.12、2.12.14、2.13.6
 
-# 模块功能
+# Module Features
 
 ## `tools`
 
@@ -45,79 +45,78 @@ nav:
 - `@javaCompatible`
 - `ProcessorCreator`
 
-> Intellij 插件 `Scala-Macro-Tools`。
+> The intellij plugin named `Scala-Macro-Tools` in marketplace.
 
 ## `cacheable-core`
 
-基于 zio 的类似 Spring`@Cacheable`和`@CacheEvict`注解的缓存 API 定义。该模块不包含具体的存储媒介。
+A cache like Spring `@Cacheable` and `@cacheEvict` based on zio. It has no implementation of storage media.
 
 - `@cacheable` / `Cache.apply`
 - `@cacheEvict` / `Cache.evict`
 
 ## `cacheable-caffeine`
 
-基于 zio 和 caffeine 的内存缓存实现，需要`cacheable-core`。
+A memory cache based on zio and caffeine. It needs `cacheable-core` module.
 
 ## `cacheable-redis`
 
-基于 zio 和 zio-redis 的分布式缓存实现，需要`cacheable-core`。
+A distributed cache based on zio and zio-redis. It needs `cacheable-core` module.
 
-# 文档
+# Document
 
 [https://bitlap.org/lab/smt](https://bitlap.org/lab/smt)
 
-# 如何使用
+# How to use
 
-添加库依赖，在 sbt 中
+Add library dependency
 
-> 在 gradle，maven 中，通常`smt-tools`被替换为`smt-tools_2.12`这种。其中，`2.12`表示 Scala 版本号。
-> **使用 tools 模块**
-> **使用 tools 模块**
+**Use `smt-tools`**
 
 ```scala
-"org.bitlap" %% "smt-tools" % "<VERSION>" //从0.4.0开始名字改成 smt-tools
+"org.bitlap" %% "smt-tools" % "<VERSION>" // named smt-tools since 0.4.0
 ```
 
-**使用 cacheable 模块 API**
+**Only Use`smt-cacheable-core`**
 
 ```scala
-// 内部包含的依赖: zio, zio-streams, zio-logging
+// cache API, include dependencies: zio, zio-streams, zio-logging
 "org.bitlap" %% "smt-cacheable-core" % "<VERSION>"
 ```
 
-**使用 redis 实现的 cacheable 模块**
+**Use `smt-cacheable-redis`**
 
-> TODO，目前不可用，无分布式锁
+> TODO Not unavailable, no distributed lock
 
 ```scala
-// 分布式缓存, 内部包含的依赖: zio-redis, config, zio-schema, zio-schema-json, 可选的 (zio-schema-derivation用于样例类序列化)
-// 依赖于`smt-cacheable-core`（不支持 Scala2.11.x）
+// distributed cache, include dependencies: zio-redis, config, zio-schema, zio-schema-json, optional (zio-schema-derivation for case class)
+// dependsOn `smt-cacheable-core`（not support Scala2.11.x）
 "org.bitlap" %% "smt-cacheable-redis" % "<VERSION>"
 ```
 
-**使用 caffeine 实现的 cacheable 模块**
+**Use `smt-cacheable-caffeine`**
 
 ```scala
-// 本地缓存, 内部包含的依赖: config, caffeine
-// 依赖于`smt-cacheable-core`
+// local cache, include dependencies: config, caffeine
+// dependsOn `smt-cacheable-core`
 "org.bitlap" %% "smt-cacheable-caffeine" % "<VERSION>"
 ```
 
-该库已发布到 maven 中央仓库，请使用最新版本。仅将本库导入构建系统（例如 gradle、sbt）是不够的。你需要多走一步。
+The artefacts have been uploaded to Maven Central. Importing the library into your build system (e.g gradle, sbt), is not enough. You need to follow an extra step.
 
-| Scala 2.11               | Scala 2.12               | Scala 2.13                            |
-| ------------------------ | ------------------------ | ------------------------------------- |
-| 导入 macro paradise 插件 | 导入 macro paradise 插件 | 开启 编译器标记 `-Ymacro-annotations` |
+| Scala 2.11                   | Scala 2.12                   | Scala 2.13                                          |
+| ---------------------------- | ---------------------------- | --------------------------------------------------- |
+| Import macro paradise plugin | Import macro paradise plugin | Enable compiler flag `-Ymacro-annotations` required |
 
 ```scala
 addCompilerPlugin("org.scalamacros" % "paradise_<your-scala-version>" % "<plugin-version>")
 ```
 
-`<your-scala-version>`必须是 Scala 版本号的完整编号，如`2.12.13`，而不是`2.12`。
+Where `<your-scala-version>` must be the full scala version. For example 2.12.13, and not 2.12.
 
-如果这不起作用，可以谷歌寻找替代品。
+If that doesn't work, google for alternatives.
 
-在`scala 2.13.x`版本中，macro paradise 的功能直接包含在 scala 编译器中。然而，仍然必须启用编译器标志`-Ymacro annotations`。
+In version scala`2.13.x`, the functionality of macro paradise has been included in the scala compiler directly. However,
+you must still enable the compiler flag `-Ymacro-annotations`.
 
 [stage]: https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg
 [badge-ci]: https://github.com/bitlap/scala-macro-tools/actions/workflows/ScalaCI.yml/badge.svg

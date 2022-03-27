@@ -1,23 +1,25 @@
 ---
 toc: content
 nav:
-  path: /zh-CN/lab/smt
+  path: /lab/smt
 ---
 
 # cacheable
 
-> 基于scala+zio的分布式缓存工具，功能类似Spring缓存注解`@Cacheable`、`@CacheEvict`。支持使用caffeine和zio-redis作为存储介质。
+> 基于 scala+zio 的分布式缓存工具，功能类似 Spring 缓存注解`@Cacheable`、`@CacheEvict`。支持使用 caffeine 和 zio-redis 作为存储介质。
 
 **缓存的语义**
-- cacheable --- 查缓存，有则返回，无则查库并设置缓存 
-  - local  指定是用内存作为缓存存储，默认为`true`
+
+- cacheable --- 查缓存，有则返回，无则查库并设置缓存
+  - local 指定是用内存作为缓存存储，默认为`true`
 - cacheEvict --- 删除缓存中的某个方法的所有记录
-   - local  指定是用内存作为缓存存储，默认为`true`
-   - values 指定需要清除的查询方法名 编译期检查，必须与注解所在类是同一个密闭类中成员；未指定values或者为`Nil`，则清除该密闭类中的所有方法的缓存
+  - local 指定是用内存作为缓存存储，默认为`true`
+  - values 指定需要清除的查询方法名 编译期检查，必须与注解所在类是同一个密闭类中成员；未指定 values 或者为`Nil`，则清除该密闭类中的所有方法的缓存
 
 ## 添加依赖
 
 - 参阅[README_CN#如何使用](../README_CN.md)如何添加依赖。
+
 ```scala
 // 如果需要使用cacheable module，则引入下面模块 (不支持 Scala2.11.x)
 // 内部包含的依赖: zio, zio-streams, zio-logging
@@ -31,14 +33,17 @@ nav:
 
 ## 配置缓存
 
-使用redis作为缓存向`application.conf`中添加redis配置，默认配置如下：
+使用 redis 作为缓存向`application.conf`中添加 redis 配置，默认配置如下：
+
 ```
 redis  {
   host = "0.0.0.0"
   port = 6379
 }
 ```
-使用caffeine作为缓存向`application.conf`中添加caffeine配置，默认配置如下：
+
+使用 caffeine 作为缓存向`application.conf`中添加 caffeine 配置，默认配置如下：
+
 ```
 caffeine {
   maximumSize = 100
@@ -46,11 +51,11 @@ caffeine {
 }
 ```
 
-> resources下没有`application.conf`则使用默认配置，否则使用`application.conf`中的配置
+> resources 下没有`application.conf`则使用默认配置，否则使用`application.conf`中的配置
 
 ## 如何使用 `@cacheable`
 
-### 直接使用cacheable模块的`Cache`
+### 直接使用 cacheable 模块的`Cache`
 
 > 支持`ZIO`和`ZStream`
 
@@ -72,7 +77,7 @@ def readFunction(id: Int, key: String): ZIO[Any, Throwable, String] = {
 
 ### 使用`@cacheable`注解自动生成
 
-> 使用hash存储 key=className-methodName
+> 使用 hash 存储 key=className-methodName
 
 ```scala
 @cacheable // 默认使用`import _root_.org.bitlap.cacheable.caffeine.Implicits._`
@@ -83,9 +88,9 @@ def readStreamFunction(id: Int, key: String): ZStream[Any, Throwable, String] = 
 
 ## 如何使用 `@cacheEvict`
 
-> 使用hash存储 key=className-methodName 对应`cacheable` key
+> 使用 hash 存储 key=className-methodName 对应`cacheable` key
 
-### 直接使用cacheable模块的`Cache`
+### 直接使用 cacheable 模块的`Cache`
 
 > 支持`ZIO`和`ZStream`
 

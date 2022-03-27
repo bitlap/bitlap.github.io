@@ -6,16 +6,15 @@ nav:
 
 ## @apply
 
-The `@apply` annotation is used to generate `apply` method for primary construction of ordinary classes.
+`@apply`注解用于为普通类的主构造函数生成`apply`方法。
 
-**Note**
+**说明**
 
-- Only support `class`.
-- Only support **primary construction**.
+- 仅支持在`class`上使用且仅支持主构造函数。
 
-**Example**
+**示例**
 
 ```scala
 @apply @toString class B2(int: Int, val j: Int, var k: Option[String] = None, t: Option[Long] = Some(1L))
-println(B2(1, 2, None, None)) //The default value of the field is not carried into the apply parameter, so all parameters are required
+println(B2(1, 2, None, None)) //不携带字段的默认值到apply参数中，所以参数都是必传
 ```

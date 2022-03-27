@@ -1,10 +1,10 @@
 ---
 toc: content
 nav:
-  path: /zh-CN/lab/zim
+  path: /lab/zim
 ---
 
-# zio基本介绍
+# zio 基本介绍
 
 zio 是一个基于纯函数式编程的异步和并发编程库。
 
@@ -18,7 +18,7 @@ zio 中最常见的类型是`ZIO[R, E, A]`，第一次见到这些类型估计�
 
 > 这里的环境可以理解为运行该效果所需要的运行时依赖。
 
-## zio类型别名
+## zio 类型别名
 
 通常在 zio 应用中 由于 `R`, `E`, `A` 有一些是固定的，所以有一些预置的类型别名可供使用。这将有助于简化代码。
 
@@ -32,11 +32,11 @@ zio 中最常见的类型是`ZIO[R, E, A]`，第一次见到这些类型估计�
 - `RIO[R, A]` — 这是`ZIO[R, Throwable, A]`的类型别名，表示需要`R`类型的环境依赖，并且可能因`Throwable`值而失败，或成功返回`A`。
 - `IO[E, A]` — 这是`ZIO[Any, E, A]`的类型别名，表示没有环境依赖要求，可能会因`E`类型的异常失败，或成功返回`A`。
 
-由上可见，`Task[A]`是一个最简单的类型，其在数据结构上类似于Scala的`Future`。
+由上可见，`Task[A]`是一个最简单的类型，其在数据结构上类似于 Scala 的`Future`。
 
 创建自己的副作用很简单，只需要使用`ZIO`或以上类型别名的伴生对象即可。如下：
 
-> succeed 通常表示不可能失败的效果值。如果不确定会失败应该使用effectTotal
+> succeed 通常表示不可能失败的效果值。如果不确定会失败应该使用 effectTotal
 
 ```scala
 // 成功的效果值
@@ -49,6 +49,7 @@ val f1 = ZIO.fail("Uh oh!")
 ```
 
 ## Hello World
+
 ```scala
 import zio.{ ExitCode, URIO, ZIO }
 import zio.console._
@@ -72,7 +73,7 @@ object MyApp extends zio.App {
 
 ## 其他
 
-一个稍微复杂的main函数如下：
+一个稍微复杂的 main 函数如下：
 
 ```scala
 object ZimServer extends ZimServiceConfiguration with zio.App {
@@ -96,7 +97,7 @@ object ZimServer extends ZimServiceConfiguration with zio.App {
 }
 ```
 
-Layer可以理解为是一个模块，模块内部维护自己的逻辑，对外提供Layer，多个Layer可以组合和传递，上面的`ZimEnv`实际为如：
+Layer 可以理解为是一个模块，模块内部维护自己的逻辑，对外提供 Layer，多个 Layer 可以组合和传递，上面的`ZimEnv`实际为如：
 
 ```scala
 // 这表示 ZimEnv这个Layer表示不会失败，没有依赖环境，返回混合类型 ZApiConfiguration with ZAkkaActorSystemConfiguration with ZAkkaHttpConfiguration
@@ -106,12 +107,12 @@ Layer可以理解为是一个模块，模块内部维护自己的逻辑，对外
 
 其中`TaskLayer[A]`和`Task[A]`是同样的道理，只不过`TaskLayer`是`Layer`类型，而`Task`是`IO`类型。
 
-> 甚至可以把Layer当做一个拼图的一部分。最终拼完的就是ZimEnv。通常，定义多个可组合可重复的Layer，可以方便的去构建一个更加复杂的环境（Layer），供系统运行使用。同时，环境声明对使用者而言是类型安全的。
+> 甚至可以把 Layer 当做一个拼图的一部分。最终拼完的就是 ZimEnv。通常，定义多个可组合可重复的 Layer，可以方便的去构建一个更加复杂的环境（Layer），供系统运行使用。同时，环境声明对使用者而言是类型安全的。
 
-## zio常见函数介绍
+## zio 常见函数介绍
 
 TODO
 
-## zio错误处理介绍
+## zio 错误处理介绍
 
 TODO

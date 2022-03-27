@@ -1,7 +1,7 @@
 ---
 toc: content
 nav:
-  path: /zh-CN/lab/zim
+  path: /lab/zim
 ---
 
 # zio 流处理介绍
@@ -95,11 +95,9 @@ for {
 - `ZIO` 效果总是会成功或失败。如果成功，它将通过单个元素成功。
 - `ZStream` 可以成功使用零个或多个元素。所以我们可以有一个空流。 `ZStream[R, E, A]` 不一定会产生任何 `A`s，它会产生零个或多个 `A`s。
 
-
 这是一个很大的区别。没有非空 `ZStream` 这样的东西。所有的 `ZStream` 都是空的，它们可以产生任意数量的 `A`s，也可以是无限数量的 `A`s。
 
 无法检查流是否为空，因为该计算尚未开始。流是超级懒惰的，所以没有办法说“哦！这个流包含任何东西吗？”不！我们无法弄清楚。我们必须使用它并尝试用它做一些事情，然后我们能弄清楚它是否有什么东西。
-
 
 ### ZSink
 
@@ -117,8 +115,8 @@ TODO
 - zio-interop-reactivestreams
 - scalikejdbc-streams
 
-
 以一个查询为例：
+
 ```scala
   private[repository] def _findUsersByFriendGroupIds(fgid: Int): StreamReadySQL[User] =
     sql"select ${u.result.*} from ${User as u} where id in (select ${af.uid} from ${AddFriend as af} where fgid = ${fgid});"
@@ -128,6 +126,7 @@ TODO
 ```
 
 准备个隐式转换将 scalikejdbc 流转换为 zio 流：
+
 ```scala
   implicit class executeStreamOperation[T](streamReadySQL: StreamReadySQL[T]) {
     def toStreamOperation(implicit databaseName: String): stream.Stream[Throwable, T] =
@@ -136,12 +135,14 @@ TODO
 ```
 
 在 repository 中使用：
+
 ```scala
   override def findUsersByFriendGroupIds(fgid: Int): stream.Stream[Throwable, model.User] =
     _findUsersByFriendGroupIds(fgid).toStreamOperation
 ```
 
 在 service 中使用：
+
 ```scala
   override def findFriendGroupsById(uid: Int): stream.Stream[Throwable, FriendList] = {
     val groupListStream = friendGroupRepository.findFriendGroupsById(uid).map { friendGroup =>
@@ -150,7 +151,7 @@ TODO
     for {
       groupList <- groupListStream
       // 嵌套数据结构，必须从流中获取所有元素，此时要先计算，最后再从效果构建新的流。其实没有使用到流的特性 个人认为是API设计本身不太合理。
-      users <- ZStream.fromEffect(userRepository.findUsersByFriendGroupIds(groupList.id).runCollect) 
+      users <- ZStream.fromEffect(userRepository.findUsersByFriendGroupIds(groupList.id).runCollect)
       _ <- LogUtil.infoS(s"findFriendGroupsById uid=>$uid, groupList=>$groupList, users=>$users")
     } yield groupList.copy(list = users.toList)
   }

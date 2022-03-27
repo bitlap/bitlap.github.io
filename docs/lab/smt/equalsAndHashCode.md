@@ -6,26 +6,24 @@ nav:
 
 ## @equalsAndHashCode
 
-The `@equalsAndHashCode` annotation is used to generate `equals` and `hashCode` methods for ordinary classes, and them takes into account the influence of super classes.
+`@equalsAndHashCode`注解用于为普通类生成`equals`和`hashCode`方法，同时均考虑超类的影响。
 
-**Note**
+**说明**
 
-- `excludeFields` specifies whether to exclude fields that are not required for the `equals` and `hashCode` methods. Optional,
-  default is `Nil` (all `var` and `val` fields **exclude `protected [this]` and `private [this]`** in the class will be used to generate the two methods).
-- Both `equals` and `hashCode` methods are affected by super classes, and `canEqual` uses `isInstanceOf` in `equals` method.
-  Some equals implementations use `that.getClass == this.getClass`
-- It uses simple hashcode algorithm, and the hashcode of the parent class are accumulated directly. The algorithm is also used by `case class`.
-- If the class of the annotation has already defined the `canEqual` method with the same signature, `canEqual` will not be generated.
-- Include the internal fields defined within a class, which named internal fields or member fields here.
+- `excludeFields` 指定是否需要排除不需要用于`equals`和`hashCode`方法的字段。可选，默认空（class 内部所有非`protected [this]`和`private [this]`的`var、val`字段都将被应用于生成这两个方法）。
+- `equals`和`hashCode`方法均会被超类影响，`canEqual`使用`isInstanceOf`，有些人在实现时，使用的是`this.getClass == that.getClass`。
+- 采用简单 hashCode 算法，父类的 hashCode 是直接被累加的。该算法也是`case class`所使用的。
+- 如果注解所在类已经定义了相同签名的`canEqual`方法，则不会生成该方法。
+- 包括在类内部中定义的成员字段，在本库中称为内部字段。
 
-**Example**
+**示例**
 
 ```scala
 @equalsAndHashCode
 class Person(var name: String, var age: Int)
 ```
 
-**Macro expansion code**
+**宏生成的中间代码**
 
 ```scala
 class Person extends scala.AnyRef {

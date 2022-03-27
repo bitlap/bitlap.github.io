@@ -1,27 +1,28 @@
 ---
 toc: content
 nav:
-  path: /zh-CN/lab/smt
+  path: /en-US/lab/smt
 ---
 
 ## @jacksonEnum
 
-`@jacksonEnum`注解用于为类的主构造函数中的所有 Scala 枚举类型的参数提供`Jackson`序列化的支持。（jackson 和 jackson-scala-module 依赖需要自己引入）
+The `@jacksonEnum` annotation is used to provide `Jackson` serialization support for all Scala enumeration type parameters in the primary constructor of the class. (jackson and jackson-scala-module dependency needs to be introduced)
 
-**说明**
+**Note**
 
-- `nonTypeRefers` 指定不需要创建`Jackson`的`TypeReference`子类的枚举类型。可选，默认`Nil`。
-- 支持`case class`和`class`。
-- 如果枚举类型存在`TypeReference`的子类，则不会生成新的子类，也不会重复添加`@JsonScalaEnumeration`注解到参数上。这主要用于解决冲突问题。
+- `nonTypeRefers` Specifies the enumeration type of the `TypeReference` subclass of `Jackson` that does not need to be created. default is `Nil`.
+- Support `case class` and `class`.
+- If the enumeration type has subclasses of `TypeReference`, no new subclasses will be generated,
+  and `JsonScalaEnumeration` annotation will not be added to the parameters repeatedly. This is mainly used to solve conflict problems.
 
-**示例**
+**Example**
 
 ```scala
 @jacksonEnum(nonTypeRefers = Seq("EnumType"))
 class B(var enum1: EnumType.EnumType, enum2: EnumType2.EnumType2 = EnumType2.A, i: Int)
 ```
 
-**宏生成的中间代码**
+**Macro expansion code**
 
 ```scala
  class EnumType2TypeRefer extends _root_.com.fasterxml.jackson.core.`type`.TypeReference[EnumType2.type] {

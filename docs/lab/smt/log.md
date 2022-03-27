@@ -6,19 +6,19 @@ nav:
 
 ## @log
 
-The `@log` annotation does not use mixed or wrapper, but directly uses macro to generate default log object and operate log. (Log dependency needs to be introduced)
+`@log`注解不使用混入和包装，而是直接使用宏生成默认的 log 对象来操作 log。日志库的依赖需要自己引入。
 
-**Note**
+**说明**
 
-- `logType` Specifies the type of `log` that needs to be generated, default is `io.github.dreamylost.logs.LogType.JLog`.
-  - `LogType.JLog` use `java.util.logging.Logger`
-  - `LogType.Log4j2` use `org.apache.logging.log4j.Logger`
-  - `LogType.Slf4j` use `org.slf4j.Logger`
-  - `LogType.ScalaLoggingLazy` implement by `scalalogging.LazyLogging` but field was renamed to `log`
-  - `LogType.ScalaLoggingStrict` implement by `scalalogging.StrictLogging` but field was renamed to `log`
-- Support `class` and `object`.
+- `logType` 指定需要生成的`log`的类型。可选，默认`org.bitlap.tools.logs.LogType.JLog`。
+  - `LogType.JLog` 使用 `java.util.logging.Logger`
+  - `LogType.Log4j2` 使用 `org.apache.logging.log4j.Logger`
+  - `LogType.Slf4j` 使用 `org.slf4j.Logger`
+  - `LogType.ScalaLoggingLazy` 基于 `scalalogging.LazyLogging` 实现，但字段被重命名为`log`
+  - `LogType.ScalaLoggingStrict` 基于 `scalalogging.StrictLogging`实现， 但字段被重命名为`log`
+- 支持普通类，单例对象。
 
-**Example**
+**示例**
 
 ```scala
 @log class TestClass1(val i: Int = 0, var j: Int) {

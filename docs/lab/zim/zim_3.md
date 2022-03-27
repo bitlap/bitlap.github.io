@@ -1,20 +1,21 @@
 ---
 toc: content
 nav:
-  path: /zh-CN/lab/zim
+  path: /lab/zim
 ---
 
-# zio1.x模块模式之2.0
+# zio1.x 模块模式之 2.0
 
 > 即 Module Pattern 2.0
 
 ## 基本介绍
 
-使用 __Module Pattern 2.0__ 编写服务比上一章介绍的 1.0 模式容易得多。2.0 中删除了某种程度的间接性，与编写服务时的面向对象方法更为相似。
+使用 **Module Pattern 2.0** 编写服务比上一章介绍的 1.0 模式容易得多。2.0 中删除了某种程度的间接性，与编写服务时的面向对象方法更为相似。
 
-__Module Pattern 2.0__ 与面向对象的服务定义方式有更多的相似之处。我们使用类来实现服务，我们使用构造函数来定义服务依赖；归根结底，我们将类构造函数提升到`ZLayer`。
+**Module Pattern 2.0** 与面向对象的服务定义方式有更多的相似之处。我们使用类来实现服务，我们使用构造函数来定义服务依赖；归根结底，我们将类构造函数提升到`ZLayer`。
 
-1. __Service Definition__ 服务定义 —— 在这个版本中定义服务与之前的版本相比略有变化。我们将获取服务定义并将其拉到顶层：
+1. **Service Definition** 服务定义 —— 在这个版本中定义服务与之前的版本相比略有变化。我们将获取服务定义并将其拉到顶层：
+
 ```scala
 trait Logging {
   // 注意，此时服务不需要定义在伴生对象的Service中
@@ -22,18 +23,20 @@ trait Logging {
 }
 ```
 
-2. __Service Implementation__ 服务实现 —— 这与我们在面向对象的方式中所做的相同。我们使用Scala类实现服务。按照惯例，我们将其实现的live版本命名为`LoggingLive`：
+2. **Service Implementation** 服务实现 —— 这与我们在面向对象的方式中所做的相同。我们使用 Scala 类实现服务。按照惯例，我们将其实现的 live 版本命名为`LoggingLive`：
+
 ```scala
 case class LoggingLive() extends Logging {
-  override def log(line: String): UIO[Unit] = 
+  override def log(line: String): UIO[Unit] =
     ZIO.succeed(print(line))
 }
 ```
 
-3. __Defining Dependencies__ 定义依赖关系 —— 我们可能需要`Console`和`Clock`服务来实现`Logging`服务。在这种情况下，我们将其依赖项放入`LoggingLive`的构造函数中。所有的依赖都只是接口，而不是实现。就像我们在面向对象风格中所做的一样：
+3. **Defining Dependencies** 定义依赖关系 —— 我们可能需要`Console`和`Clock`服务来实现`Logging`服务。在这种情况下，我们将其依赖项放入`LoggingLive`的构造函数中。所有的依赖都只是接口，而不是实现。就像我们在面向对象风格中所做的一样：
+
 ```scala
 case class LoggingLive(console: Console, clock: Clock) extends Logging {
-  override def log(line: String): UIO[Unit] = 
+  override def log(line: String): UIO[Unit] =
     for {
       current <- clock.currentDateTime
       _       <- console.printLine(s"$current--$line").orDie
@@ -41,7 +44,8 @@ case class LoggingLive(console: Console, clock: Clock) extends Logging {
 }
 ```
 
-4. __Defining ZLayer__ 定义`ZLayer` —— 现在，我们为`LoggingLive`数据类型创建一个伴生对象，并将服务实现提升到`ZLayer`：
+4. **Defining ZLayer** 定义`ZLayer` —— 现在，我们为`LoggingLive`数据类型创建一个伴生对象，并将服务实现提升到`ZLayer`：
+
 ```scala
 object LoggingLive {
   val layer: URLayer[Console with Clock, Logging] =
@@ -49,16 +53,17 @@ object LoggingLive {
 }
 ```
 
-5. __Accessor Methods__ 访问器方法 —— 最后，为了创建更符合人体工程学的API，最好为我们所有的服务方法编写访问器方法。就像我们在 1.0 中所做的一样，但稍作更改：
+5. **Accessor Methods** 访问器方法 —— 最后，为了创建更符合人体工程学的 API，最好为我们所有的服务方法编写访问器方法。就像我们在 1.0 中所做的一样，但稍作更改：
+
 ```scala
 object Logging {
   def log(line: String): URIO[Logging, Unit] = ZIO.serviceWith[Logging](_.log(line))
 }
 ```
 
-很简单！ ZIO鼓励我们遵循面向对象编程的一些最佳实践。所以它不需要我们抛弃所有面向对象的知识。
+很简单！ ZIO 鼓励我们遵循面向对象编程的一些最佳实践。所以它不需要我们抛弃所有面向对象的知识。
 
-## 在zim中的应用
+## 在 zim 中的应用
 
 介绍了官网基本例子来自己实现一个真实需求。现在需要实现一个`WsService`服务：
 
@@ -149,6 +154,7 @@ object WsService extends ZimServiceConfiguration {
 ```
 
 `WsService`的实现，命名为`WsServiceLive`，并依赖一个`ApplicationConfiguration`：
+
 ```scala
 case class WsServiceLive(private val app: ApplicationConfiguration) extends WsService {
 
