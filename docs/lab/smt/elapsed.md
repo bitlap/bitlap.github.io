@@ -24,12 +24,12 @@ nav:
 ```scala
 class A {
   // Duration和TimeUnit必须是全类名
-  @elapsed(limit = scala.concurrent.duration.Duration(1, java.util.concurrent.TimeUnit.SECONDS), logLevel = io.github.dreamylost.LogLevel.WARN)
+  @elapsed(limit = scala.concurrent.duration.Duration(1, java.util.concurrent.TimeUnit.SECONDS), logLevel = org.bitlap.tools.LogLevel.WARN)
   def helloScala1(t: String): Future[String] = {
     Future(t)(scala.concurrent.ExecutionContext.Implicits.global)
   }
 
-  @elapsed(limit = scala.concurrent.duration.Duration(1, java.util.concurrent.TimeUnit.SECONDS), logLevel = io.github.dreamylost.LogLevel.INFO)
+  @elapsed(limit = scala.concurrent.duration.Duration(1, java.util.concurrent.TimeUnit.SECONDS), logLevel = org.bitlap.tools.LogLevel.INFO)
   def helloScala2: String = Await.result(helloScala1("world"), Duration.Inf)
 }
 ```
