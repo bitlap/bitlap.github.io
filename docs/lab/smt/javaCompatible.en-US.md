@@ -7,7 +7,7 @@ nav:
 ## @javaCompatible
 
 The `@javaCompatible` annotation to generate non-parameter constructor and get/set method for case classes.
-This is useful when using Scala case class and Java libraries (such as myabtis and springboot) at the same time.
+This is useful when using Scala case class and Java libraries (such as mybatis and springboot) at the same time.
 
 **Note**
 
