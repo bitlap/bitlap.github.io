@@ -10,7 +10,7 @@ The `@log` annotation does not use mixed or wrapper, but directly uses macro to 
 
 **Note**
 
-- `logType` Specifies the type of `log` that needs to be generated, default is `io.github.dreamylost.logs.LogType.JLog`.
+- `logType` Specifies the type of `log` that needs to be generated, default is `org.bitlap.tools.logs.LogType.JLog`.
   - `LogType.JLog` use `java.util.logging.Logger`
   - `LogType.Log4j2` use `org.apache.logging.log4j.Logger`
   - `LogType.Slf4j` use `org.slf4j.Logger`
