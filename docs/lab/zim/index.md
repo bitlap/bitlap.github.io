@@ -86,10 +86,9 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 - [x] zio-streams、与 scalikejdbc-streams 的集成
 - [x] zio 中的依赖注入
 - [ ] zio-streams 与 akka-streams 的集成
-- [ ] zio-actors、与 akka-actor 通信的集成
+- [ ] zio-actors 与 akka-actor 通信的集成
 - [ ] zio 如何构建一个可重用模块
 - [ ] zio 应用如何测试
-- [ ] zio-schema 的用途
-- [ ] 什么是 tapir
+- [ ] zio-schema 应用
 - [ ] 如何编写 tapir 应用
 - [ ] 如何编写 akka-http 接口
