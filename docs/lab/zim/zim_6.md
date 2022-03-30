@@ -75,7 +75,7 @@ akka-stream
 
 **使用**
 
-这里是使用了tapir，暂不考虑。
+这里是使用了tapir，暂时忽略。
 ```scala
   lazy val getOffLineMessageRoute: Route =
     AkkaHttpServerInterpreter().toRoute(ZimUserEndpoint.getOffLineMessageEndpoint.serverLogic { user => _ =>
