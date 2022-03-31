@@ -86,4 +86,68 @@ akka-stream
 ```
 
 这样就创建了一个 akka-stream 的`Route`对象了。tapir 的好处是能使用 DSL 来描述请求和响应，并具备文档化的能力，同时兼容各大 Scala web平台。
-需要注意的是，这里的`Route`和akka http自己的`Route`对使用者来说是没有任何区别。
+需要注意的是，这里的`Route`和 akka http 自己的`Route`对使用者来说是没有任何区别。
+
+# ZStream 错误处理
+
+在 ZIO 中，抛异常可以使用`ZIO.fail(BusinessException())`，或者在 stream 中使用`ZStream.fail(BusinessException())`，他们的处理方式相同。
+
+以 zim 为例，有以下业务异常：
+```scala
+sealed trait ZimError extends Throwable with Product {
+  val msg: String
+  val code: Int
+}
+
+object ZimError {
+
+  case class BusinessException(
+    override val code: Int = SystemConstant.ERROR,
+    override val msg: String = SystemConstant.ERROR_MESSAGE
+  ) extends ZimError
+}
+```
+
+在 akka-http 中可以使用`ExceptionHandler`统一处理`Route`的异常，如：
+
+```scala
+  // 注意这里是PartialFunction，不能使用`_`匹配
+  // customExceptionHandler作为Route.seal(getOffLineMessageRoute)的隐式参数被使用。
+  implicit def customExceptionHandler: ExceptionHandler = ExceptionHandler {
+    case e: Unauthorized =>
+      extractUri { uri =>
+        Logger.root.error(s"Request to $uri could not be handled normally cause by ${e.toString}")
+        getFromResource("static/html/403.html")
+      }
+    case e: Exception => 
+      extractUri { uri =>
+        Logger.root.error(s"Request to $uri could not be handled normally cause by ${e.toString}")
+        getFromResource("static/html/500.html")
+      }
+  }
+```
+
+还有一种方法是在 ZIO 处理完逻辑结束时，通过 ZIO 提供的一些操作把前面抛出的业务异常捕获为有效的返回数据，比如转成 json，如下：
+```scala
+  def buildFlowResponse[T <: Product]
+    : stream.Stream[Throwable, T] => Future[Either[ZimError, Source[ByteString, Any]]] = respStream => {
+    val resp = (for {
+      list <- respStream.runCollect // 这样就变成了 ZIO 包含 List数据，不能没办法包一层 ResultSet
+      resp = ResultSet[List[T]](data = list.toList).asJson.noSpaces
+      r <- ZStream(resp).map(body => ByteString(body)).toPublisher 
+    } yield r).catchSome(catchStreamError) // 捕获一些特定异常，这样返回给akka-http的就不会出现错误，而是一个正常的 json
+
+    Future.successful(
+      Right(Source.fromPublisher(unsafeRun(resp)))
+    )
+  }
+  // 匹配业务异常病获取错误信息和错误码，返回给前端
+  // 如果需要返回错误页面或者重定向，哪还是得是有 akka-http 那种ExceptionHandler。
+  @inline private def catchStreamError: PartialFunction[Throwable, ZIO[Any, Throwable, Publisher[ByteString]]] = {
+    case BusinessException(ec, em) =>
+      ZStream
+        .succeed(ResultSet(code = ec, msg = em).asJson.noSpaces)
+        .map(body => ByteString(body))
+        .toPublisher
+  }: PartialFunction[Throwable, ZIO[Any, Throwable, Publisher[ByteString]]]
+```
