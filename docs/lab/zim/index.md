@@ -61,17 +61,19 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 
 ## 技术栈
 
-- 开发语言：scala
+- 开发语言：scala2
 - 平台：jvm
 - 前端：layim 3.0
 - 主体框架：zio 1.x
-- API：akka-http
+- API server：akka-http
 - API 文档化工具：tapir
 - 数据库：redis、mysql
-- 数据操作：scalikejdbc-stream
+- 数据操作：scalikejdbc-streams
 - 内存缓存：smt-cacheable-caffeine
 - 定时任务：zio-actors
 - 序列化：circe
+- 加密工具 zio-crypto
+- 日志：zio-logging
 - 细化类型：refined
 - WebSocket：akka-http、akka-actor-typed
 - 邮件：simple-java-mail
