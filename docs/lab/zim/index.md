@@ -70,6 +70,7 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 - 数据库：redis、mysql
 - 数据操作：scalikejdbc-stream
 - 内存缓存：smt-cacheable-caffeine
+- 定时任务：zio-actors
 - 序列化：circe
 - 细化类型：refined
 - WebSocket：akka-http、akka-actor-typed
