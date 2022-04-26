@@ -9,7 +9,7 @@ nav:
 
 ## 运行环境准备
 
-- 执行 `./prepare.sh` 脚本, 然后修改 `src/main/resources/application.conf` 中相关数据库的信息
+- 执行 `./prepare.sh` 脚本, 然后修改 `modules/zim-server/src/main/resources/application.conf` 中相关数据库的信息
 - 在本地 MySQL 中创建数据库`zim`，注意驱动的版本
 - 启动本地的 Redis，使用默认用户和密码即可
 - 使用`resources/sql/schema.sql`初始化表结构
