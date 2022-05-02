@@ -109,7 +109,7 @@ val csvData =
     |200,3,"{""city"":""北京"",""os"":""Mac""}",pv,2""".stripMargin
 ```
 
-需要将其转换到下面的`case class`中
+需要将其转换到下面的`case class`中，目前CSV列需要与`case class`的字段顺序一一对应
 ```scala
 case class Metric(time: Long, entity: Int, dimensions: List[Dimension], metricName: String, metricValue: Int)
 case class Dimension(key: String, value: String)
