@@ -22,6 +22,19 @@ nav:
 - `Boolean` 、`Option[Boolean]`
 - `T`、`List[T]`，`T` 是 `case class`
 
+如果`case class`的字段不是`Option`，但是CSV的该列为空，则解析CSV时，`case class`对象的对应字段有相应的零值。
+- `Int` = `0`
+- `Long` = `0L`
+- `String` = `""`
+- `Char` = `'?'`
+- `Short` = `0`
+- `Double` = `0D`
+- `Float` = `0F`
+- `Boolean` = `false`
+- `T` = `null`
+
+对于`Option[_]`类型，为空的列始终有默认值`None`
+
 ### 编写`CsvConverter`
 ```scala
 case class Dimension(key: String, value: Option[String], d: Char, c: Long, e: Short, f: Boolean, g: Float, h: Double)
