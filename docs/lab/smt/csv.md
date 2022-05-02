@@ -110,7 +110,7 @@ val metrics: Array[Option[Metric]] = csvData
   .map(csv => // 2. 对每行csv进行解析
     ScalableBuilder[Metric] // 解析的目标结果类型，Metric是case class
       // setField用于设置dimensions字段应该怎样从CSV行的该列中被解析出来
-      // dims值为："{""city"":""北京"",""os"":""Mac""}"
+      // dims值为字符串：{"city":"北京","os":"Mac"}
       // StringUtils.extraJsonValues 是默认提供的解析方法，当然也可以使用JSON，但是为了不依赖任何第三方库，我选择由用户指定如何解析，也更加灵活
       .setField[List[Dimension]](_.dimensions, dims => StringUtils.extraJsonValues[Dimension](dims)((k, v) => Dimension(k, v)))
       .build(csv) // 这里没有传，采用默认列分隔符 ','
