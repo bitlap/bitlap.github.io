@@ -4,7 +4,7 @@ nav:
   path: /lab/smt
 ---
 
-# CSV 转 Scala `case class`
+# CSV
 
 ## smt-csv-core使用
 
