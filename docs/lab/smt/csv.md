@@ -139,11 +139,13 @@ assert(csv.toString() == """List(100,1,"{""city"":""北京"",""os"":""Mac""\}",v
 
 ### 快速从文件中解析
 
-> `org.bitlap.csv.core.StringUtils`中提供了封装方法
+**scala 2.13.x 可用**
+
+> `org.bitlap.csv.core.StringUtils`中提供了封装方法 
 
 ```scala
 // 文件路径：src/test/resources/simple_data.csv
-val metrics = StringUtils.readCsvFromClassPath[Metric2]("simple_data.csv") { line =>
+val metrics = ScalableHelper.readCsvFromClassPath[Metric2]("simple_data.csv") { line =>
   ScalableBuilder[Metric2]
     .setField[Seq[Dimension3]](_.dimensions, dims => StringUtils.extractJsonValues[Dimension3](dims)((k, v) => Dimension3(k, v))
     .build(line)
