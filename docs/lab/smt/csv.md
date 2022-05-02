@@ -126,17 +126,27 @@ val csv = metrics.map(metric =>
   CsvableBuilder[Metric]
     .setField(
       _.dimensions,
-      (ds: List[Dimension]) => s"{${ds.map(kv => s"""\"\"${kv.key}\"\":\"\"${kv.value}\"\"""").mkString(",")}"
+      (ds: List[Dimension]) => s"""\"{${ds.map(kv => s"""\"\"${kv.key}\"\":\"\"${kv.value}\"\"""").mkString(",")}\\}\""""
     )
     .build(metric.get)
     .toCsvString
 )
 
-assert(
-  csv.toString() == """List(100,1,{""city"":""北京"",""os"":""Mac"",vv,1, 100,1,{""city"":""北京"",""os"":""Mac"",pv,2, 100,1,{""city"":""北京"",""os"":""Windows"",vv,1, 100,1,{""city"":""北京"",""os"":""Windows"",pv,3, 100,2,{""city"":""北京"",""os"":""Mac"",vv,1, 100,2,{""city"":""北京"",""os"":""Mac"",pv,5, 100,3,{""city"":""北京"",""os"":""Mac"",vv,1, 100,3,{""city"":""北京"",""os"":""Mac"",pv,2, 200,1,{""city"":""北京"",""os"":""Mac"",vv,1, 200,1,{""city"":""北京"",""os"":""Mac"",pv,2, 200,1,{""city"":""北京"",""os"":""Windows"",vv,1, 200,1,{""city"":""北京"",""os"":""Windows"",pv,3, 200,2,{""city"":""北京"",""os"":""Mac"",vv,1, 200,2,{""city"":""北京"",""os"":""Mac"",pv,5, 200,3,{""city"":""北京"",""os"":""Mac"",vv,1, 200,3,{""city"":""北京"",""os"":""Mac"",pv,2)"""
-)
+assert(csv.toString() == """List(100,1,"{""city"":""北京"",""os"":""Mac""\}",vv,1, 100,1,"{""city"":""北京"",""os"":""Mac""\}",pv,2, 100,1,"{""city"":""北京"",""os"":""Windows""\}",vv,1, 100,1,"{""city"":""北京"",""os"":""Windows""\}",pv,3, 100,2,"{""city"":""北京"",""os"":""Mac""\}",vv,1, 100,2,"{""city"":""北京"",""os"":""Mac""\}",pv,5, 100,3,"{""city"":""北京"",""os"":""Mac""\}",vv,1, 100,3,"{""city"":""北京"",""os"":""Mac""\}",pv,2, 200,1,"{""city"":""北京"",""os"":""Mac""\}",vv,1, 200,1,"{""city"":""北京"",""os"":""Mac""\}",pv,2, 200,1,"{""city"":""北京"",""os"":""Windows""\}",vv,1, 200,1,"{""city"":""北京"",""os"":""Windows""\}",pv,3, 200,2,"{""city"":""北京"",""os"":""Mac""\}",vv,1, 200,2,"{""city"":""北京"",""os"":""Mac""\}",pv,5, 200,3,"{""city"":""北京"",""os"":""Mac""\}",vv,1, 200,3,"{""city"":""北京"",""os"":""Mac""\}",pv,2)""")
 ```
 
 > 暂时没有考虑特殊情况：CSV中JSON结构必须是：`"{""city"":""北京"",""os"":""Mac""}"`
 
+### 快速从文件中解析
 
+> `org.bitlap.csv.core.StringUtils`中提供了封装方法
+
+```scala
+// 文件路径：src/test/resources/simple_data.csv
+val metrics = StringUtils.readCsvFromClassPath[Metric2]("simple_data.csv") { line =>
+  ScalableBuilder[Metric2]
+    .setField[Seq[Dimension3]](_.dimensions, dims => StringUtils.extractJsonValues[Dimension3](dims)((k, v) => Dimension3(k, v))
+    .build(line)
+    .toScala
+}
+```
