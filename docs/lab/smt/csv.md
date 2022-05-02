@@ -141,7 +141,7 @@ assert(csv.toString() == """List(100,1,"{""city"":""北京"",""os"":""Mac""\}",v
 
 **scala 2.13.x 可用**
 
-> `org.bitlap.csv.core.StringUtils`中提供了封装方法 
+> `org.bitlap.csv.core.ScalableHelper`中提供了封装方法 
 
 ```scala
 // 文件路径：src/test/resources/simple_data.csv
