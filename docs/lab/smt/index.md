@@ -48,7 +48,7 @@ nav:
 - 零依赖，类型安全
 
 ```scala
-"org.bitlap" %% "smt-csv-core" % "<VERSION>" // 从0.5.1开始 
+"org.bitlap" %% "smt-csv-core" % "<VERSION>" // 从0.5.2开始 
 ```
 
 ## csv-derive
@@ -56,7 +56,7 @@ nav:
 - `DeriveCsvConverter` 为Scala`case class`自动派生`Converter`实例
 
 ```scala
-"org.bitlap" %% "smt-csv-derive" % "<VERSION>" // 从0.5.1开始 
+"org.bitlap" %% "smt-csv-derive" % "<VERSION>" // 从0.5.2开始 
 ```
 
 ## tools
