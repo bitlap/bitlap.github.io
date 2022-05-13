@@ -130,6 +130,16 @@ val metrics: Array[Option[Metric]] = csvData
       .toScala)  // 执行转换操作
 ```
 
+**简化**
+```scala
+val metrics = ScalableBuilder[Metric]
+  .setField[List[Dimension]](
+    _.dimensions,
+    dims => StringUtils.extractJsonValues[Dimension](dims)((k, v) => Dimension(k, v))
+  )
+  .convert(csvData.split("\n").toList)
+```
+
 ### 使用`CsvableBuilder`写入CSV
 
 > 将上面的`metrics`转换为CSV行数据
@@ -149,6 +159,17 @@ assert(csv.toString() == """List(100,1,"{""city"":""北京"",""os"":""Mac""}",vv
 ```
 
 > 暂时没有考虑特殊情况：CSV中JSON结构必须是：`"{""city"":""北京"",""os"":""Mac""}"`
+
+**简化**
+```scala
+val csv = CsvableBuilder[Metric]
+  .setField(
+    _.dimensions,
+    (ds: List[Dimension]) =>
+      s"""\"{${ds.map(kv => s"""\"\"${kv.key}\"\":\"\"${kv.value}\"\"""").mkString(",")}}\""""
+  )
+  .convert(metrics.filter(_.isDefined).map(_.get))
+```
 
 ### 快速从文件中解析
 
