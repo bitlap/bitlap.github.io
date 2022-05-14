@@ -129,6 +129,8 @@ val metrics: Array[Option[Metric]] = csvData
       .convert(csv)) // // 执行转换操作，这里没有传，采用默认列分隔符 ','
 ```
 
+> 这里的级联调用不能分开
+
 **简化**
 ```scala
 val metrics = ScalableBuilder[Metric]
@@ -169,17 +171,14 @@ val csv = CsvableBuilder[Metric]
   .convert(metrics.filter(_.isDefined).map(_.get))
 ```
 
-### 快速从文件中解析
-
-**scala 2.13.x 可用**
-
-> `org.bitlap.csv.core.ScalableHelper`中提供了封装方法 
+### 快速解析CSV文件
 
 ```scala
-// 文件路径：src/test/resources/simple_data.csv
-val metrics = ScalableHelper.readCsvFromClassPath[Metric2]("simple_data.csv") { line =>
+val metrics =
   ScalableBuilder[Metric2]
-    .setField[Seq[Dimension3]](_.dimensions, dims => StringUtils.extractJsonValues[Dimension3](dims)((k, v) => Dimension3(k, v))
-    .convert(line)
-}
+    .setField[Seq[Dimension3]](
+      _.dimensions,
+      dims => StringUtils.extractJsonValues[Dimension3](dims)((k, v) => Dimension3(k, v))
+    )
+    .convertFrom(ClassLoader.getSystemResourceAsStream("simple_data.csv"), "utf-8")
 ```
