@@ -126,8 +126,7 @@ val metrics: Array[Option[Metric]] = csvData
       // dims值为字符串：{"city":"北京","os":"Mac"}
       // StringUtils.extraJsonValues 是默认提供的解析方法，当然也可以使用JSON，但是为了不依赖任何第三方库，我选择由用户指定如何解析，也更加灵活
       .setField[List[Dimension]](_.dimensions, dims => StringUtils.extraJsonValues[Dimension](dims)((k, v) => Dimension(k, v)))
-      .build(csv) // 这里没有传，采用默认列分隔符 ','
-      .toScala)  // 执行转换操作
+      .convert(csv)) // // 执行转换操作，这里没有传，采用默认列分隔符 ','
 ```
 
 **简化**
@@ -151,8 +150,7 @@ val csv = metrics.map(metric =>
       _.dimensions,
       (ds: List[Dimension]) => s"""\"{${ds.map(kv => s"""\"\"${kv.key}\"\":\"\"${kv.value}\"\"""").mkString(",")}}\""""
     )
-    .build(metric.get)
-    .toCsvString
+    .convert(metric.get)
 )
 
 assert(csv.toString() == """List(100,1,"{""city"":""北京"",""os"":""Mac""}",vv,1, 100,1,"{""city"":""北京"",""os"":""Mac""}",pv,2, 100,1,"{""city"":""北京"",""os"":""Windows""}",vv,1, 100,1,"{""city"":""北京"",""os"":""Windows""}",pv,3, 100,2,"{""city"":""北京"",""os"":""Mac""}",vv,1, 100,2,"{""city"":""北京"",""os"":""Mac""}",pv,5, 100,3,"{""city"":""北京"",""os"":""Mac""}",vv,1, 100,3,"{""city"":""北京"",""os"":""Mac""}",pv,2, 200,1,"{""city"":""北京"",""os"":""Mac""}",vv,1, 200,1,"{""city"":""北京"",""os"":""Mac""}",pv,2, 200,1,"{""city"":""北京"",""os"":""Windows""}",vv,1, 200,1,"{""city"":""北京"",""os"":""Windows""}",pv,3, 200,2,"{""city"":""北京"",""os"":""Mac""}",vv,1, 200,2,"{""city"":""北京"",""os"":""Mac""}",pv,5, 200,3,"{""city"":""北京"",""os"":""Mac""}",vv,1, 200,3,"{""city"":""北京"",""os"":""Mac""}",pv,2)""")
@@ -182,7 +180,6 @@ val csv = CsvableBuilder[Metric]
 val metrics = ScalableHelper.readCsvFromClassPath[Metric2]("simple_data.csv") { line =>
   ScalableBuilder[Metric2]
     .setField[Seq[Dimension3]](_.dimensions, dims => StringUtils.extractJsonValues[Dimension3](dims)((k, v) => Dimension3(k, v))
-    .build(line)
-    .toScala
+    .convert(line)
 }
 ```
