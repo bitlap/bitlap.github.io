@@ -37,9 +37,14 @@ nav:
 
 对于`Option[_]`类型，为空的列始终有默认值`None`
 
-## 通过构造器使用
+## 使用builder构造器
 
-给定下面这种复杂的CSV数据，其中第三列是个JSON。
+**依赖**
+```
+"org.bitlap" %% "smt-csv-core" % "<VERSION>" // 使用最新的
+```
+
+给定下面这种复杂的CSV测试数据，其中第三列是个JSON。
 ```
 val csvData =
   """100,1,"{""city"":""北京"",""os"":""Mac""}",vv,1
@@ -111,9 +116,15 @@ val metrics =
 ```
 
 
-## smt-csv-derives使用
+## 使用converter自动派生器
 
 > 简化代码，自动派生`implicit val csvConverter: Converter[T]`，支持类型与smt-csv-core相同。
+
+**依赖**
+```
+"org.bitlap" %% "smt-csv-derive" % "<VERSION>" // 使用最新的
+```
+
 ```scala
 case class Dimension2(key: String, value: Option[String])
 
@@ -132,6 +143,8 @@ val csv = Converter[List[Dimension2]].toCsvString(dimension.orNull)
 
 ### 自定义处理复杂结构
 
+> 同样使用上面的`csvData`数据
+  
 ```scala
 case class CsvLine4(time: Long, entity: Int, dimensions: List[Dimension], metricName: String, metricValue: Int)
 case class Dimension(key: String, value: String)
