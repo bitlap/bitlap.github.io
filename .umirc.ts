@@ -26,8 +26,8 @@ export default defineConfig({
       {
         title: "实验室",
         children: [
-          { title: "Scala-Macro-Tools", path: "/lab/smt" },
-          { title: "Zim", path: "/lab/zim" }
+          { title: "smt", path: "/lab/smt" },
+          { title: "zim", path: "/lab/zim" }
         ]
       },
       {
@@ -40,8 +40,8 @@ export default defineConfig({
       {
         title: "Lab",
         children: [
-          { title: "Scala-Macro-Tools", path: "/en-US/lab/smt" },
-          { title: "Zim", path: "/en-US/lab/zim" }
+          { title: "smt", path: "/en-US/lab/smt" },
+          { title: "zim", path: "/en-US/lab/zim" }
         ]
       },
       {
