@@ -19,6 +19,12 @@ case class TestEntity(
   id: String,
   key: String
 )
+
+// 准备数据
+val data = Map(
+  "btc" -> TestEntity("btc", "hello1", "world1"),
+  "etc" -> TestEntity("eth", "hello2", "world2")
+)
 ```
 
 1. 配置缓存
