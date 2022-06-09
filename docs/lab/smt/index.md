@@ -40,13 +40,29 @@ nav:
 
 > 在gradle，maven中，通常`smt-annotations`被替换为`smt-annotations_2.12`这种。其中，`2.12`表示Scala版本号。
 
+## cache
+
+- 内存缓存。
+- 零依赖，类型安全。
+- API与实现完全独立。
+```scala
+"org.bitlap" %% "smt-cache" % "<VERSION>" // 从0.6.0开始 
+```
+
+## common
+
+- 一些很通用的工具类。
+```scala
+"org.bitlap" %% "smt-common" % "<VERSION>" // 从0.6.0开始 
+```
+
 ## csv
 
 - `Converter` 基础的CSV转换器。
 - `CsvableBuilder` 支持以自定义的方式将Scala`case class`转化为一行CSV字符串。
 - `ScalableBuilder` 支持以自定义的方式将一行CSV字符串转化为Scala`case class`。
 - `CsvFormat` 支持自定义格式和TSV文件。
-- 零依赖，类型安全
+- 零依赖，类型安全。
 
 ```scala
 "org.bitlap" %% "smt-csv" % "<VERSION>" // 从0.5.2开始 
@@ -54,13 +70,13 @@ nav:
 
 ## csv-derive
 
-- `DeriveCsvConverter` 为Scala`case class`自动派生`Converter`实例
+- `DeriveCsvConverter` 为Scala`case class`自动派生`Converter`实例。
 
 ```scala
 "org.bitlap" %% "smt-csv-derive" % "<VERSION>" // 从0.5.2开始 
 ```
 
-## tools
+## annotations
 
 - `@toString`
 - `@json`
@@ -76,7 +92,7 @@ nav:
 > Intellij插件 `Scala-Macro-Tools`。
 
 ```scala
-"org.bitlap" %% "smt-annotations" % "<VERSION>" //从0.6.0开始名字改成 smt-annotations 
+"org.bitlap" %% "smt-annotations" % "<VERSION>" // 从0.6.0开始名字改成 smt-annotations 
 ```
 
 ## cacheable
@@ -131,12 +147,12 @@ addCompilerPlugin("org.scalamacros" % "paradise_<your-scala-version>" % "<plugin
 
 [Stage]: https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg
 [Badge-CI]: https://github.com/bitlap/smt/actions/workflows/ScalaCI.yml/badge.svg
-[Badge-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-annotations/latest-by-scala-version.svg?platform=jvm
+[Badge-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-csv-derive/latest.svg?platform=jvm
 [Badge-Jetbrains]: https://img.shields.io/jetbrains/plugin/v/17202-scala-macro-tools
 [Badge-Codecov]: https://codecov.io/gh/bitlap/smt/branch/master/graph/badge.svg?token=IA596YRTOT
 [Badge-Snapshots]: https://img.shields.io/nexus/s/org.bitlap/smt-annotations_2.13?server=https%3A%2F%2Fs01.oss.sonatype.org
 
 [Link-Jetbrains]: https://plugins.jetbrains.com/plugin/17202-scala-macro-tools
 [Link-Codecov]: https://codecov.io/gh/bitlap/smt
-[Link-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-annotations
+[Link-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-csv-derive
 [Link-Snapshots]: https://s01.oss.sonatype.org/content/repositories/snapshots/org/bitlap/
