@@ -31,8 +31,11 @@ val data = Map(
 ```scala
 object CacheImplicits {
 
-  implicit lazy val testEntityCache: GenericCache.Aux[String, TestEntity] = // String缓存key，TestEntity缓存值
+  implicit lazy val testEntityCache: GenericCache.Aux[String, TestEntity] = // String：缓存key，TestEntity：缓存值
     GenericCache[String, TestEntity](CacheType.Lru()) // 缓存类型 lru
+
+//  implicit lazy val testEntityAsyncCache: GenericCache.Aux[String, TestEntity] = // String：缓存key，TestEntity：缓存值
+//    GenericCache[String, TestEntity](CacheType.Lru(), ExecutionContext.Implicits.global) // Future cache
 }
 ```
 
@@ -40,7 +43,9 @@ object CacheImplicits {
 ```scala
 import CacheImplicits._
 
-val cache: CacheRef[String, TestEntity] = Cache.getCache[TestEntity]
+val cache: CacheRef[String, TestEntity, Identity] = Cache.getSyncCache[TestEntity]
+// Future
+// val asyncCache: CacheRef[String, TestEntity, Future] = Cache.getAsyncCache[TestEntity]
 cache.init(data)
 ```
 
