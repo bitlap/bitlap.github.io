@@ -4,7 +4,7 @@ nav:
   path: /lab/smt
 ---
 
-# common 
+# common - Transformer
 
 - `Transformer` 将样例类`From`的对象转变为样例类`To`的对象。
 - `Transformable` 自动生成`Transformer`的实例。
