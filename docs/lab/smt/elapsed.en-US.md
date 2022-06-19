@@ -14,7 +14,7 @@ The `@elapsed` annotation is used to calculate the execution time of the method.
   - If there is an `org.slf4j.Logger` object of `slf4j` in the owner scope of the method, this object is used; otherwise, `println` is used.
 - `logLevel` Specifies the log level to print.
 - The return type of supported method is not `Future[_]`.
-  - Use `map` to implement.
+  - Use `onComplete` to implement.
 - The return type of the supported method is not `Future`.
   - Use `try finally` to implement.
 - Annotation is only supported use on non-abstract method.
