@@ -10,7 +10,7 @@ nav:
 - `Transformable` 自动生成`Transformer`的实例。
 - 有两种方式可以映射字段：
     - 1.使用`Transformer`，并在样例类的伴生对象中定义`Transformer`隐式值。
-    - 2.直接使用`Transformable`的`mapField`方法。
+    - 2.直接使用`Transformable`的`mapName`方法。
 
 ## 数据结构
 
