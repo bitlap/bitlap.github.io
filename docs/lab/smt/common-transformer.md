@@ -33,8 +33,8 @@ nav:
       //  定义隐式转换器，并将FQueryResult的字段rows 映射到TQueryResult的trows
       implicit val queryResultTransform: Transformer[FQueryResult, TQueryResult] =
         Transformable[FQueryResult, TQueryResult]
-          .mapField(_.rows, _.trows)
-          .mapField(_.tableSchema, _.ttableSchema)
+          .mapName(_.rows, _.trows)
+          .mapName(_.tableSchema, _.ttableSchema)
           .instance
     }
 
@@ -54,7 +54,7 @@ nav:
 
     object FColumnDesc {
       implicit val columnDescTransform: Transformer[FColumnDesc, TColumnDesc] = Transformable[FColumnDesc, TColumnDesc]
-        .mapField(_.columnName, _.tcolumnName) // mapping name
+        .mapName(_.columnName, _.tcolumnName) // mapping name
         .instance
     }
   }
