@@ -39,7 +39,7 @@ nav:
     }
 
     object FRowSet {
-      // 字段名字和类型相同，即使顺序不同也不要紧，不需要mapFIeld，简单定义一个即可
+      // 字段名字和类型相同，即使顺序不同也不要紧，不需要mapName，简单定义一个即可
       implicit val rowSetTransform: Transformer[FRowSet, TRowSet] = Transformable[FRowSet, TRowSet].instance
     }
 
