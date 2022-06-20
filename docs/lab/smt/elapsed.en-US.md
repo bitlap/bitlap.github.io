@@ -10,7 +10,7 @@ The `@elapsed` annotation is used to calculate the execution time of the method.
 
 **Note**
 
-- `limit` The log will be printed or output to the console if the execution time exceeds this value.
+- `limit` The log will be printed or output to the console if the execution time exceeds this value. The unit is milliseconds.
   - If there is an `org.slf4j.Logger` object of `slf4j` in the owner scope of the method, this object is used; otherwise, `println` is used.
 - `logLevel` Specifies the log level to print.
 - The return type of supported method is not `Future[_]`.
@@ -24,12 +24,12 @@ The `@elapsed` annotation is used to calculate the execution time of the method.
 ```scala
 class A {
   // Duration and TimeUnit must Full class name
-  @elapsed(limit = scala.concurrent.duration.Duration(1, java.util.concurrent.TimeUnit.SECONDS), logLevel = org.bitlap.tools.LogLevel.WARN)
+  @elapsed(limit = 1, logLevel = org.bitlap.tools.LogLevel.WARN)
   def helloScala1(t: String): Future[String] = {
     Future(t)(scala.concurrent.ExecutionContext.Implicits.global)
   }
 
-  @elapsed(limit = scala.concurrent.duration.Duration(1, java.util.concurrent.TimeUnit.SECONDS), logLevel = org.bitlap.tools.LogLevel.INFO)
+  @elapsed(limit = 1, logLevel = org.bitlap.tools.LogLevel.INFO)
   def helloScala2: String = Await.result(helloScala1("world"), Duration.Inf)
 }
 ```
