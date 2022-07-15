@@ -4,8 +4,6 @@ nav:
   path: /lab/smt
 ---
 
-<img align="right" width="20%" height="30%" src="/images/smt.png" alt="https://bitlap.org"/>
-
 # smt
 
 | Project Stage | CI              | Codecov                                   |
@@ -45,6 +43,11 @@ nav:
 ## common
 
 - 一些很通用的工具类。
+- `Transformer` 将样例类`From`的对象转变为样例类`To`的对象。
+- `Transformable` 自动生成`Transformer`的实例。
+- 有两种方式可以映射字段：
+    - 1.使用`Transformer`，并在样例类的伴生对象中定义`Transformer`隐式值。
+    - 2.直接使用`Transformable`的`mapField`方法。
 ```scala
 "org.bitlap" %% "smt-common" % "<VERSION>" // 从0.6.0开始 
 ```
@@ -104,22 +107,18 @@ nav:
 
 基于zio和zio-redis的分布式缓存实现，内部依赖`cacheable`。
 
-> TODO，目前不可用，无分布式锁
+> TODO，目前不可用
 
 ```scala
-// 分布式缓存, 内部包含的依赖: zio-redis, config, zio-schema, zio-schema-json, 可选的 (zio-schema-derivation用于样例类序列化)
-// 依赖于`smt-cacheable`
 "org.bitlap" %% "smt-cacheable-redis" % "<VERSION>" // 不支持Scala2.11.x
 ```
 
 ## cacheable-caffeine
 
-基于zio和caffeine的内存缓存实现，内部依赖`cacheable`。
+基于zio和caffeine的内存缓存实现，内部依赖`cacheable`。（不支持Scala2.11.x）
 
 ```scala
-// 本地缓存, 内部包含的依赖: config, caffeine
-// 依赖于`smt-cacheable`
-"org.bitlap" %% "smt-cacheable-caffeine" % "<VERSION>" // 不支持Scala2.11.x
+"org.bitlap" %% "smt-cacheable-caffeine" % "<VERSION>"
 ```
 
 该库已发布到maven中央仓库，请使用最新版本。仅将本库导入构建系统（例如gradle、sbt）是不够的。你需要多走一步。
@@ -138,14 +137,21 @@ addCompilerPlugin("org.scalamacros" % "paradise_<your-scala-version>" % "<plugin
 
 在`scala 2.13.x`版本中，macro paradise的功能直接包含在scala编译器中。然而，仍然必须启用编译器标志`-Ymacro annotations`。
 
-[Stage]: https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg
+# 特别感谢
+
+<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/IntelliJ_IDEA.svg" alt="IntelliJ IDEA logo.">
+
+This project is developed using JetBrains IDEA.
+Thanks to JetBrains for providing me with a free license, which is a strong support for me.
+
+[Stage]: https://img.shields.io/badge/Project%20Stage-Development-yellowgreen.svg
 [Badge-CI]: https://github.com/bitlap/smt/actions/workflows/ScalaCI.yml/badge.svg
-[Badge-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-csv-derive/latest.svg?platform=jvm
+[Badge-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-annotations/latest.svg?platform=jvm
 [Badge-Jetbrains]: https://img.shields.io/jetbrains/plugin/v/17202-scala-macro-tools
 [Badge-Codecov]: https://codecov.io/gh/bitlap/smt/branch/master/graph/badge.svg?token=IA596YRTOT
 [Badge-Snapshots]: https://img.shields.io/nexus/s/org.bitlap/smt-annotations_2.13?server=https%3A%2F%2Fs01.oss.sonatype.org
 
 [Link-Jetbrains]: https://plugins.jetbrains.com/plugin/17202-scala-macro-tools
 [Link-Codecov]: https://codecov.io/gh/bitlap/smt
-[Link-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-csv-derive
+[Link-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-annotations
 [Link-Snapshots]: https://s01.oss.sonatype.org/content/repositories/snapshots/org/bitlap/
