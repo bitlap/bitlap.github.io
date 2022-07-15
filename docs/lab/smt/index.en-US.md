@@ -4,8 +4,6 @@ nav:
   path: /en-US/lab/smt
 ---
 
-<img align="right" width="20%" height="30%" src="/images/smt.png" alt="https://bitlap.org"/>
-
 # smt
 
 | Project Stage | CI              | Codecov                                   |
@@ -41,6 +39,11 @@ nav:
 ## common
 
 - Some very general tool classes.
+- `Transformer` Transform the case class`From`'s object to the case class`To`'s object.
+- `Transformable` Automatically generate instances of`Transformer`.
+- Two ways to map fields: 
+  - 1.use`Transformer`and define`Transformer`implicitly in the companion object of the case class.
+  - 2.use`Transformable`'s`mapField`method directly.
 ```scala
 "org.bitlap" %% "smt-common" % "<VERSION>" // since 0.6.0 
 ```
@@ -86,36 +89,30 @@ nav:
 
 ## cacheable
 
-A cache like Spring `@Cacheable` and `@cacheEvict` based on zio. It has no implementation of storage media.
+A cache like Spring `@Cacheable` and `@cacheEvict` based on zio. It has no implementation of storage media. (not support Scala2.11.x)
 
 - `@cacheable` / `Cache.apply`
 - `@cacheEvict` / `Cache.evict`
 
 ```scala
-// cache API, include dependencies: zio, zio-streams, zio-logging
-"org.bitlap" %% "smt-cacheable" % "<VERSION>" // not support Scala2.11.x
+"org.bitlap" %% "smt-cacheable" % "<VERSION>"
 ```
 
 ## cacheable-redis
 
-A distributed cache based on zio and zio-redis. It needs `cacheable` module.
+A distributed cache based on zio and zio-redis. It depends on `cacheable` module.
 
-> TODO Not unavailable, no distributed lock
+> TODO Not unavailable
 
 ```scala
-// distributed cache, include dependencies: zio-redis, config, zio-schema, zio-schema-json, optional (zio-schema-derivation for case class)
-// dependsOn `smt-cacheable`
 "org.bitlap" %% "smt-cacheable-redis" % "<VERSION>" // not support Scala2.11.x
 ```
 
 ## cacheable-caffeine
 
-A memory cache based on zio and caffeine. It needs `cacheable` module.
-
+A memory cache based on zio and caffeine. It needs `cacheable` module. (not support Scala2.11.x)
 ```scala
-// local cache, include dependencies: config, caffeine
-// dependsOn `smt-cacheable`
-"org.bitlap" %% "smt-cacheable-caffeine" % "<VERSION>" // not support Scala2.11.x
+"org.bitlap" %% "smt-cacheable-caffeine" % "<VERSION>"
 ```
 
 The artefacts have been uploaded to Maven Central. Importing the library into your build system (e.g gradle, sbt), is not enough. You need to follow an extra step.
@@ -135,14 +132,22 @@ If that doesn't work, google for alternatives.
 In version scala`2.13.x`, the functionality of macro paradise has been included in the scala compiler directly. However,
 you must still enable the compiler flag `-Ymacro-annotations`.
 
-[Stage]: https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg
+# Especially thanks
+
+<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/IntelliJ_IDEA.svg" alt="IntelliJ IDEA logo.">
+
+
+This project is developed using JetBrains IDEA.
+Thanks to JetBrains for providing me with a free license, which is a strong support for me.
+
+[Stage]: https://img.shields.io/badge/Project%20Stage-Development-yellowgreen.svg
 [Badge-CI]: https://github.com/bitlap/smt/actions/workflows/ScalaCI.yml/badge.svg
-[Badge-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-csv-derive/latest.svg?platform=jvm
+[Badge-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-annotations/latest.svg?platform=jvm
 [Badge-Jetbrains]: https://img.shields.io/jetbrains/plugin/v/17202-scala-macro-tools
 [Badge-Codecov]: https://codecov.io/gh/bitlap/smt/branch/master/graph/badge.svg?token=IA596YRTOT
 [Badge-Snapshots]: https://img.shields.io/nexus/s/org.bitlap/smt-annotations_2.13?server=https%3A%2F%2Fs01.oss.sonatype.org
 
 [Link-Jetbrains]: https://plugins.jetbrains.com/plugin/17202-scala-macro-tools
 [Link-Codecov]: https://codecov.io/gh/bitlap/smt
-[Link-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-csv-derive
+[Link-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-annotations
 [Link-Snapshots]: https://s01.oss.sonatype.org/content/repositories/snapshots/org/bitlap/
