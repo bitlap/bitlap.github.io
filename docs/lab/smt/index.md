@@ -75,13 +75,11 @@ nav:
 ## annotations
 
 - `@toString`
-- `@json`
 - `@builder`
 - `@log`
 - `@apply`
 - `@constructor`
 - `@equalsAndHashCode`
-- `@jacksonEnum`
 - `@elapsed`
 - `@javaCompatible`
 
