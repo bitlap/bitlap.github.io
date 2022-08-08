@@ -14,12 +14,10 @@ nav:
 |---------------------------------------------------------------|-----------------------------------------------|------------------------------------------------------------------|
 | [![smt Scala version support][Badge-Scaladex]][Link-Scaladex] | [![Version][Badge-Jetbrains]][Link-Jetbrains] | [![Sonatype Nexus (Snapshots)][Badge-Snapshots]][Link-Snapshots] |
 
-**[中文说明](./README_CN.md) | [English](./README.md)**
-
 # 环境
 
-- Java 8、11 编译通过
-- Scala 2.11.12、2.12.14、2.13.8 编译通过
+- Java 8+
+- Scala 2.11.12、2.12.14、2.13.8
 
 # 文档
 
@@ -33,21 +31,19 @@ nav:
 
 ## cache
 
-- 内存缓存。
+- 一个统一的缓存适配器。
 - 零依赖，类型安全。
-- API与实现完全独立。
 ```scala
 "org.bitlap" %% "smt-cache" % "<VERSION>" // 从0.6.0开始 
 ```
 
 ## common
 
-- 一些很通用的工具类。
-- `Transformer` 将样例类`From`的对象转变为样例类`To`的对象。
-- `Transformable` 自动生成`Transformer`的实例。
-- 有两种方式可以映射字段：
-    - 1.使用`Transformer`，并在样例类的伴生对象中定义`Transformer`隐式值。
-    - 2.直接使用`Transformable`的`mapField`方法。
+- 存放一些很通用的工具类。
+- 对象转换器`transform`
+    - 零依赖，类型安全。
+    - `Transformer` 将样例类`From`的对象转变为样例类`To`的对象。
+    - `Transformable` 使用宏派生任意类型的`Transformer`实例。
 ```scala
 "org.bitlap" %% "smt-common" % "<VERSION>" // 从0.6.0开始 
 ```
@@ -89,7 +85,7 @@ nav:
 "org.bitlap" %% "smt-annotations" % "<VERSION>" // 从0.6.0开始名字改成 smt-annotations 
 ```
 
-## cacheable
+## cacheable [不可上生产]
 
 基于zio的类似Spring`@Cacheable`和`@CacheEvict`注解的缓存API定义。该模块不包含具体的存储媒介。
 
@@ -101,7 +97,7 @@ nav:
 "org.bitlap" %% "smt-cacheable" % "<VERSION>" // 不支持Scala2.11.x
 ```
 
-## cacheable-redis
+## cacheable-redis [不可上生产]
 
 基于zio和zio-redis的分布式缓存实现，内部依赖`cacheable`。
 
@@ -111,7 +107,7 @@ nav:
 "org.bitlap" %% "smt-cacheable-redis" % "<VERSION>" // 不支持Scala2.11.x
 ```
 
-## cacheable-caffeine
+## cacheable-caffeine [不可上生产]
 
 基于zio和caffeine的内存缓存实现，内部依赖`cacheable`。（不支持Scala2.11.x）
 
@@ -121,8 +117,8 @@ nav:
 
 该库已发布到maven中央仓库，请使用最新版本。仅将本库导入构建系统（例如gradle、sbt）是不够的。你需要多走一步。
 
-| Scala 2.11               | Scala 2.12               | Scala 2.13                            |
-| ------------------------ | ------------------------ | ------------------------------------- |
+| Scala 2.11           | Scala 2.12           | Scala 2.13                     |
+|----------------------|----------------------|--------------------------------|
 | 导入 macro paradise 插件 | 导入 macro paradise 插件 | 开启 编译器标记 `-Ymacro-annotations` |
 
 ```scala
