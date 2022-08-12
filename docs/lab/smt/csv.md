@@ -6,7 +6,7 @@ nav:
 
 # CSV
 
-## 1、smt-csv-core使用
+## 1、smt-csv使用
 
 > 处理一般情况的CSV转换
 
@@ -41,7 +41,7 @@ nav:
 
 **依赖**
 ```
-"org.bitlap" %% "smt-csv-core" % "<VERSION>" // 使用最新的
+"org.bitlap" %% "smt-csv" % "<VERSION>" // 使用最新的
 ```
 
 给定下面这种复杂的CSV测试数据，其中第三列是个JSON。
