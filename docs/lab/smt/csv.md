@@ -20,7 +20,7 @@ nav:
 - `Double`、`Option[Double]`
 - `Float`、`Option[Float]`
 - `Boolean` 、`Option[Boolean]`
-- `T`、`List[T]`，`Seq[T]`，`T` 只能是 `case class`
+- `T`，集合：`List[T]`、`Seq[T]`、`Set[T]`、`Vector[T]`，`T` 只能是 `case class`
 
 如果`case class`的字段不是`Option`，但是CSV的该列为空（或解析失败），则解析CSV时，`case class`对象的对应字段有相应的零值。
 - `Int` = `0`
@@ -32,8 +32,7 @@ nav:
 - `Float` = `0F`
 - `Boolean` = `false`
 - `T` = `null`
-- `List` = `Nil`
-- `Seq` = `Nil`
+- 集合 = `Nil`
 
 对于`Option[_]`类型，为空的列始终有默认值`None`
 
@@ -171,7 +170,7 @@ val csvString :Strng = Converter[List[CsvLine4]].toCsvString(csvs.orNull)
 ```scala
 implicit val format = new TsvFormat {
   override val delimiter: Char             = ' '  // 列分隔符
-  override val ignoreEmptyLines: Boolean   = true // 读时忽略空行，写时忽略空字符串
+  override val ignoreEmptyLines: Boolean   = true // 读文件时忽略空行，写入文件时忽略空字符串
   override val ignoreHeader: Boolean       = true // 读的时候忽略头
   override val prependHeader: List[String] = List("time", "entity", "dimensions", "metricName", "metricValue") // 写的时候增加头
 }
