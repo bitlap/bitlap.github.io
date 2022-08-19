@@ -12,7 +12,6 @@ nav:
 > 已经安装了docker的可以使用，镜像所使用的配置文件：`application-docker.conf`
 
 - 下载镜像 `docker pull liguobin/zim:0.3.0-SNAPSHOT`，版本号用最新的
-- 准备MySQL挂载目录 `mkdir /opt/homebrew/var/mysql/datadir/`
 - 运行镜像 `docker run liguobin/zim:0.3.0-SNAPSHOT`
 - 查看容器IP `docker inspect container_id`
   - 尝试 `ping` 容器的 IP，Mac 电脑如果 `ping` 不通可能是因为需要加路由，参考`https://www.haoyizebo.com/posts/fd0b9bd8`，记得同时关闭 Mac 的 VPN。
