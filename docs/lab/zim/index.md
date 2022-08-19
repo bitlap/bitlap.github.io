@@ -27,13 +27,13 @@ zim 名字取自 zio 和 IM 的结合体。
 - zio-interop-reactivestreams
 - zio-logging
 - zio-test
+- interop-cats
 - zio-crypto 实验性
 - zio-redis 实验性
 - zio-actors 实验性
 - zio-actors-akka-interop 实验性
 - zio-schema-derivation 实验性
 - zio-schema 实验性
-- smt-cacheable-caffeine 实验性 -- 是个类似 spring 的注解缓存（内存缓存）
 - zio-schema-json 实验性
 
 zim 同时会选用简单易用的 scala 框架或库，尽可能不使用任何 java 库和类型系统来构建程序。
@@ -47,11 +47,13 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 ## 模块
 
 - `zim-auth` 登录鉴权，目前由 cookie 实现并对外提供“鉴权缓存”函数，具体实现由`zim-server`完成。
-- `zim-cache` 缓存，目前由 zio-redis 实现。
-- `zim-domain` 所有领域对象，包括数据库、http、websocket 等，还包括 circe 和 scalikejdbc 所需的隐式对象。
+- `zim-cache-api` 缓存接口定义（`F[_]`）。
+- `zim-cache-redis4cats` 基于redis4cats实现缓存。 
+- `zim-cache-redis4zio` 基于zio-redis实现缓存。
+- `zim-domain` 所有领域模型和repository接口定义（`F[_]`）。
 - `zim-server` Server端的主要实现，包括 zio 依赖管理、基于 akka-http 的 route 实现、基于 tapir 的 API 具体实现。
 - `zim-infra` 配置和基础设施，包括系统基础配置、工具类、领域对象及其 CRUD 实现。
-- `zim-api` Tapir API 描述定义，具体实现由`zim-server`完成。
+- `zim-api` tapir API 描述定义和service接口定义（`F[_]`），具体实现由`zim-server`完成。
 
 ## 环境
 
