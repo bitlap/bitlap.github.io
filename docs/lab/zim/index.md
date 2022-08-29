@@ -16,7 +16,7 @@ nav:
 
 zim 名字取自 zio 和 IM 的结合体。
 
-> [zio](https://github.com/zio/zio) 是一个 scala 中用于异步和并发编程的类型安全、可组合的库
+> [zio](https://github.com/zio/zio) 是一个 scala 中用于异步和并发编程的类型安全、可组合（模块化）的库
 
 > IM 为即时通信系统
 
@@ -44,6 +44,8 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 
 基于学习考虑，zim 目前直接使用了一些实验性库。
 
+> 现已升级到zio2
+
 ## 模块
 
 - `zim-auth` 登录鉴权，目前由 cookie 实现并对外提供“鉴权缓存”函数，具体实现由`zim-server`完成。
@@ -67,7 +69,7 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 - 开发语言：scala2
 - 平台：jvm
 - 前端：layim 3.0
-- 主体框架：zio 1
+- 主体框架：zio 2
 - API server：akka-http
 - API 文档化工具：tapir 1
 - 数据库：redis、mysql
@@ -92,6 +94,7 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 - [x] zio 中的依赖注入
 - [x] zio-streams 与 akka-stream 的集成
 - [x] zio-actors 与 akka-actor-typed 通信的集成
+- [ ] zio1升级到zio2踩坑和总结 
 - [ ] zio 如何构建一个可重用模块
 - [ ] zio 应用如何测试
 - [ ] zio-schema 应用
