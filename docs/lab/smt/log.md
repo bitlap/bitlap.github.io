@@ -10,12 +10,12 @@ nav:
 
 **说明**
 
-- `logType` 指定需要生成的`log`的类型。可选，默认`org.bitlap.tools.logs.LogType.JLog`。
-  - `LogType.JLog` 使用 `java.util.logging.Logger`
-  - `LogType.Log4j2` 使用 `org.apache.logging.log4j.Logger`
-  - `LogType.Slf4j` 使用 `org.slf4j.Logger`
-  - `LogType.ScalaLoggingLazy` 基于 `scalalogging.LazyLogging` 实现，但字段被重命名为`log`
-  - `LogType.ScalaLoggingStrict` 基于 `scalalogging.StrictLogging`实现， 但字段被重命名为`log`
+- `logType` 指定需要生成的`log`的类型。可选，默认`"JLog"`。
+  - `"JLog"` 使用 `java.util.logging.Logger`
+  - `"Log4j2"` 使用 `org.apache.logging.log4j.Logger`
+  - `"Slf4j"` 使用 `org.slf4j.Logger`
+  - `"ScalaLoggingLazy"` 基于 `scalalogging.LazyLogging` 实现，但字段被重命名为`log`
+  - `"ScalaLoggingStrict"` 基于 `scalalogging.StrictLogging`实现， 但字段被重命名为`log`
 - 支持普通类，单例对象。
 
 **示例**
@@ -25,7 +25,7 @@ nav:
   log.info("hello")
 }
 
-@log(logType=LogType.Slf4j)
+@log(logType="Slf4j")
 class TestClass6(val i: Int = 0, var j: Int) {
   log.info("hello world")
 }
