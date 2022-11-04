@@ -23,13 +23,12 @@ nav:
 
 ```scala
 class A {
-  // Duration和TimeUnit必须是全类名
-  @elapsed(limit = 1, logLevel = org.bitlap.tools.LogLevel.WARN)
+  @elapsed(limit = 1, logLevel = "warn") // warn info debug
   def helloScala1(t: String): Future[String] = {
     Future(t)(scala.concurrent.ExecutionContext.Implicits.global)
   }
 
-  @elapsed(limit = 1, logLevel = org.bitlap.tools.LogLevel.INFO)
+  @elapsed(limit = 1, logLevel = "info")
   def helloScala2: String = Await.result(helloScala1("world"), Duration.Inf)
 }
 ```

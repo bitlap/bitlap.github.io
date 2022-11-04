@@ -75,7 +75,7 @@ case class Dimension(key: String, value: String)
 ### CSV字符串转Scala
 
 ```scala
-val metrics: List[Option[Metric]] = ScalableBuilder[Metric]
+val metrics: List[Option[Metric]] = ReaderBuilder[Metric]
       // setField用于设置dimensions字段应该怎样从CSV行的该列中被解析出来
       // dims值为字符串：{"city":"北京","os":"Mac"}
       // StringUtils.extraJsonValues 是默认提供的解析方法，当然也可以使用JSON，但是为了不依赖任何第三方库，我选择由用户指定如何解析，也更加灵活
@@ -91,7 +91,7 @@ val metrics: List[Option[Metric]] = ScalableBuilder[Metric]
 > 将上面的`metrics`转换为CSV行数据
 
 ```scala
-val csv: String = CsvableBuilder[Metric]
+val csv: String = WriterBuilder[Metric]
   .setField(
     _.dimensions,
     (ds: List[Dimension]) =>
@@ -106,7 +106,7 @@ val csv: String = CsvableBuilder[Metric]
 
 ```scala
 val metrics =
-  ScalableBuilder[Metric]
+  ReaderBuilder[Metric]
     .setField[Seq[Dimension]](
       _.dimensions,
       dims => StringUtils.extractJsonValues[Dimension](dims)((k, v) => Dimension(k, v))
@@ -176,10 +176,10 @@ implicit val format = new TsvFormat {
 }
 // 使用format隐藏参数
 // 这个例子没有使用setField，因为这里的Metric是case class Metric(time: Long, entity: Int, dimensions: String, metricName: String, metricValue: Int)
-val metrics = ScalableBuilder[Metric].convertFrom(ClassLoader.getSystemResourceAsStream("simple_data_header.tsv"))
+val metrics = ReaderBuilder[Metric].convertFrom(ClassLoader.getSystemResourceAsStream("simple_data_header.tsv"))
 val file = new File("./simple_data_header.tsv")
 // 使用format隐藏参数
-CsvableBuilder[Metric].convertTo(metrics.filter(_.isDefined).map(_.get), file)
+WriterBuilder[Metric].convertTo(metrics.filter(_.isDefined).map(_.get), file)
 ```
 
 > 实际上CSV中也使用了默认的format隐式参数`implicit val defaultCsvFormat: CsvFormat = new DefaultCsvFormat {}`，如果像TSV这样自己定义一个，那么就会覆盖默认的隐式。
