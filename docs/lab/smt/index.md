@@ -3,7 +3,6 @@ toc: content
 nav:
   path: /lab/smt
 ---
-
 # smt
 
 | Project Stage | CI              | Codecov                                   |
@@ -17,7 +16,7 @@ nav:
 # 环境
 
 - Java 8+
-- Scala 2.11.12、2.12.14、2.13.8
+- Scala 2.11.12、2.12.16、2.13.8
 
 # 文档
 
@@ -40,6 +39,7 @@ nav:
 
 - 通用的宏操作API的封装。
 - 对象转换器（零依赖，类型安全）。
+- JDBC `ResultSet`转换器。
 
 ```scala
 "org.bitlap" %% "smt-common" % "<VERSION>"
@@ -47,7 +47,7 @@ nav:
 
 ## csv
 
-- CSV/TSV文件解析器（零依赖，类型安全）。
+- CSV/TSV文件读写工具（零依赖，类型安全）。
 
 ```scala
 "org.bitlap" %% "smt-csv" % "<VERSION>" 
@@ -55,7 +55,7 @@ nav:
 
 ## csv-derive
 
-- 为Scala`case class`自动派生`Converter`实例。
+- 自动派生CSV/TSV文件读写工具。
 
 ```scala
 "org.bitlap" %% "smt-csv-derive" % "<VERSION>" 
