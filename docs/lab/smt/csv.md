@@ -94,8 +94,7 @@ val metrics: List[Option[Metric]] = ReaderBuilder[Metric]
 val csv: String = WriterBuilder[Metric]
   .setField(
     _.dimensions,
-    (ds: List[Dimension]) =>
-      s"""\"{${ds.map(kv => s"""\"\"${kv.key}\"\":\"\"${kv.value}\"\"""").mkString(",")}}\""""
+    (ds: List[Dimension]) =>  StringUtils.asJsonString(ds.map(f => f.key -> f.value)
   )
   .convert(metrics.filter(_.isDefined).map(_.get))
 ```
@@ -152,8 +151,7 @@ object Dimension {
     override def toScala(line: String): Option[List[Dimension]] =
       Option(StringUtils.extractJsonValues[Dimension](line)((k, v) => Dimension(k, v)))
 
-    override def toCsvString(t: List[Dimension]): String =
-      s"""\"{${t.map(kv => s"""\"\"${kv.key}\"\":\"\"${kv.value}\"\"""").mkString(",")}}\""""
+    override def toCsvString(t: List[Dimension]): String =  StringUtils.asJsonString(t.map(f => f.key -> f.value)
   }
 }
 object CsvLine4 {
