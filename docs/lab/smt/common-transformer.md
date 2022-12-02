@@ -8,9 +8,15 @@ nav:
 
 - `Transformer` 将样例类`From`的对象转变为样例类`To`的对象。
 - `Transformable` 自动生成`Transformer`的实例。
-- 有两种方式可以映射字段：
-    - 1.使用`Transformer`，并在样例类的伴生对象中定义`Transformer`隐式值。
-    - 2.直接使用`Transformable`的`mapName`方法。
+- 有多种方式可以映射字段：
+    - 使用`Transformer`，并在样例类的伴生对象中定义`Transformer`隐式值。
+    - 使用`Transformable`的`setName`方法设置字段的名称映射。
+    - 使用`Transformable`的`setType`方法设置字段的类型映射。
+- 其他方法
+    - `enableOptionDefaultsToNone`
+    - `enableCollectionDefaultsToEmpty`
+    - `setDefaultValue`
+
 
 ## 数据结构
 
@@ -33,13 +39,13 @@ nav:
       //  定义隐式转换器，并将FQueryResult的字段rows 映射到TQueryResult的trows
       implicit val queryResultTransform: Transformer[FQueryResult, TQueryResult] =
         Transformable[FQueryResult, TQueryResult]
-          .mapName(_.rows, _.trows)
-          .mapName(_.tableSchema, _.ttableSchema)
+          .setName(_.rows, _.trows)
+          .setName(_.tableSchema, _.ttableSchema)
           .instance
     }
 
     object FRowSet {
-      // 字段名字和类型相同，即使顺序不同也不要紧，不需要mapName，简单定义一个即可
+      // 字段名字和类型相同，即使顺序不同也不要紧，不需要setName，简单定义一个即可
       implicit val rowSetTransform: Transformer[FRowSet, TRowSet] = Transformable[FRowSet, TRowSet].instance
     }
 
@@ -54,7 +60,7 @@ nav:
 
     object FColumnDesc {
       implicit val columnDescTransform: Transformer[FColumnDesc, TColumnDesc] = Transformable[FColumnDesc, TColumnDesc]
-        .mapName(_.columnName, _.tcolumnName) // mapping name
+        .setName(_.columnName, _.tcolumnName) // mapping name
         .instance
     }
   }
