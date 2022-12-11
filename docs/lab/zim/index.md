@@ -49,20 +49,21 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 ## 模块
 
 - `zim-auth` 登录鉴权，目前由 cookie 实现并对外提供“鉴权缓存”函数，具体实现由`zim-server`完成。
-- `zim-cache-api` 缓存接口定义（`F[_]`）。
+- `zim-cache-api` 缓存接口定义（tagless final）。
 - `zim-cache-redis4cats` 基于redis4cats实现缓存。 
 - `zim-cache-redis4zio` 基于zio-redis实现缓存。
 - `zim-domain` 所有领域模型定义。
 - `zim-server` Server端的主要实现，包括 zio 依赖管理、基于 akka-http 的 route 实现、基于 tapir 的 API 具体实现。
 - `zim-infra` 配置和基础设施，包括系统基础配置、工具类、部分领域对象及核心CRUD实现。
-- `zim-api` tapir API 描述定义和 service、repository 接口定义（`F[_]`），repository 具体实现在`zim-infra`，service 具体实现在`zim-server`。
+- `zim-api` tapir API 描述定义和 service、repository 接口定义（tagless final），repository 具体实现在`zim-infra`，service 具体实现在`zim-server`。
 
 ## 环境
 
-- scala 2.12/2.13
-- java 8/11
+- scala 2.13
+- java 11/17
 - redis 4/5/6
 - mysql 8
+- docker-compose
 
 ## 技术栈
 
