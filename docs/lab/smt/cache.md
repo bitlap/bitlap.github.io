@@ -32,11 +32,8 @@ val data = Map(
 ```scala
 object CacheImplicits {
 
-  implicit lazy val testEntityCache: GenericCache.Aux[String, TestEntity] = // String：缓存key，TestEntity：缓存值
-    GenericCache[String, TestEntity](CacheType.Lru()) // 缓存类型 lru
-
-//  implicit lazy val testEntityAsyncCache: GenericCache.Aux[String, TestEntity] = // String：缓存key，TestEntity：缓存值
-//    GenericCache[String, TestEntity](CacheType.Lru(), ExecutionContext.Implicits.global) // Future cache
+  implicit lazy val testEntityAsyncCache: GenericCache.Aux[String, TestEntity] = // String：缓存key，TestEntity：缓存值
+    GenericCache[String, TestEntity](CacheType.Lru(), ExecutionContext.Implicits.global) // Future cache
 }
 ```
 
@@ -44,18 +41,11 @@ object CacheImplicits {
 ```scala
 import CacheImplicits._
 
-val cache: CacheRef[String, TestEntity, Identity] = Cache.getSyncCache[TestEntity]
-// Future
-// val asyncCache: CacheRef[String, TestEntity, Future] = Cache.getAsyncCache[TestEntity]
+val asyncCache = Cache[String, TestEntity]
 cache.init(data)
 ```
 
 3. 从缓存中取数据
 ```scala
-val result: Option[TestEntity] = cache.getT("etc") // 特殊key需要传CacheKeyBuilder
-```
-
-4. 从缓存中只取数据的一个`key`字段
-```scala
-val keyOpt: Option[String] = cache.getTField("etc", CaseClassField[TestEntity](_.key))
+val result: Future[Option[TestEntity]] = cache.getT("etc") // 特殊key需要传CacheKeyBuilder
 ```
