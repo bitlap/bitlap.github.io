@@ -6,18 +6,17 @@ nav:
 
 # smt
 
-| CI              | Codecov                                   |
-|-----------------|-------------------------------------------|
-| ![CI][Badge-CI] | [![codecov][Badge-Codecov]][Link-Codecov] |
+| CI              | Codecov                                   | Scaladex                                                      | Jetbrains Plugin                              |
+|-----------------|-------------------------------------------|---------------------------------------------------------------|-----------------------------------------------|
+| ![CI][Badge-CI] | [![codecov][Badge-Codecov]][Link-Codecov] | [![smt Scala version support][Badge-Scaladex]][Link-Scaladex] | [![Version][Badge-Jetbrains]][Link-Jetbrains] | 
 
-| Scaladex                                                      | Jetbrains Plugin                              |
-|---------------------------------------------------------------|-----------------------------------------------|
-| [![smt Scala version support][Badge-Scaladex]][Link-Scaladex] | [![Version][Badge-Jetbrains]][Link-Jetbrains] |
 
 # 环境
 
-- Java 8+
-- Scala 2.11.12、2.12.16、2.13.8 => Scala3版本 [bitlap/rolls](https://github.com/bitlap/rolls)
+- Scala 2.11.12
+- Scala 2.12.16
+- Scala 2.13.8 
+- Scala3版本 [bitlap/rolls](https://github.com/bitlap/rolls)
 
 # 文档
 
@@ -29,13 +28,6 @@ nav:
 
 > 在gradle，maven中，通常`smt-annotations`被替换为`smt-annotations_2.12`，其中，`2.12`表示Scala版本号。
 
-## cache
-
-- 统一缓存API，缓存适配器（零依赖，类型安全）。
-```scala
-"org.bitlap" %% "smt-cache" % "<VERSION>"
-```
-
 ## common
 
 - 通用的宏操作API的封装。
@@ -46,31 +38,13 @@ nav:
 "org.bitlap" %% "smt-common" % "<VERSION>"
 ```
 
-## csv
-
-- CSV/TSV文件读写工具（零依赖，类型安全）。
-
-```scala
-"org.bitlap" %% "smt-csv" % "<VERSION>" 
-```
-
-## csv-derive
-
-- 自动派生CSV/TSV文件读写工具。
-
-```scala
-"org.bitlap" %% "smt-csv-derive" % "<VERSION>" 
-```
-
 ## annotations
 
 - `@toString`
 - `@builder`
-- `@log`
 - `@apply`
 - `@constructor`
 - `@equalsAndHashCode`
-- `@elapsed`
 - `@javaCompatible`
 
 > Intellij插件 `Scala-Macro-Tools`。
@@ -101,11 +75,12 @@ This project is developed using JetBrains IDEA.
 Thanks to JetBrains for providing me with a free license, which is a strong support for me.
 
 [Badge-CI]: https://github.com/bitlap/smt/actions/workflows/ci.yml/badge.svg
-[Badge-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-annotations/latest.svg?platform=jvm
+[Badge-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-annotations/latest-by-scala-version.svg?platform=jvm
 [Badge-Jetbrains]: https://img.shields.io/jetbrains/plugin/v/17202-scala-macro-tools
 [Badge-Codecov]: https://codecov.io/gh/bitlap/smt/branch/master/graph/badge.svg?token=IA596YRTOT
 
 [Link-Jetbrains]: https://plugins.jetbrains.com/plugin/17202-scala-macro-tools
 [Link-Codecov]: https://codecov.io/gh/bitlap/smt
 [Link-Scaladex]: https://index.scala-lang.org/bitlap/smt/smt-annotations
+
 
