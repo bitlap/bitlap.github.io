@@ -1,7 +1,6 @@
 ---
+title: Transformer
 toc: content
-nav:
-  path: /lab/smt
 ---
 
 # common - Transformer
@@ -9,20 +8,20 @@ nav:
 - `Transformer` 将样例类`From`的对象转变为样例类`To`的对象。
 - `Transformable` 自动生成`Transformer`的实例。
 - 有多种方式可以映射字段：
-    - 使用`Transformer`，并在样例类的伴生对象中定义`Transformer`隐式值。
-    - 使用`Transformable`的`setName`方法设置字段的名称映射。
-    - 使用`Transformable`的`setType`方法设置字段的类型映射。
+  - 使用`Transformer`，并在样例类的伴生对象中定义`Transformer`隐式值。
+  - 使用`Transformable`的`setName`方法设置字段的名称映射。
+  - 使用`Transformable`的`setType`方法设置字段的类型映射。
 - 其他方法
-    - `enableOptionDefaultsToNone`
-    - `enableCollectionDefaultsToEmpty`
-    - `setDefaultValue`
-
+  - `enableOptionDefaultsToNone`
+  - `enableCollectionDefaultsToEmpty`
+  - `setDefaultValue`
 
 ## 数据结构
 
-下面是一个完整的例子，会将from中的类的对象，转化为to中的类的对象。
+下面是一个完整的例子，会将 from 中的类的对象，转化为 to 中的类的对象。
 
-> from对象中多的字段会被在创建to被忽略，但少了则不行，无法转换到to，编译失败，不过最新版本已经支持了设置默认值，设置后便能编译。
+> from 对象中多的字段会被在创建 to 被忽略，但少了则不行，无法转换到 to，编译失败，不过最新版本已经支持了设置默认值，设置后便能编译。
+
 ```scala
   object from {
 
@@ -77,6 +76,7 @@ nav:
 ```
 
 ## 使用
+
 ```scala
     import org.bitlap.common.models.from._
     import org.bitlap.common.models.to._

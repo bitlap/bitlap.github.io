@@ -1,7 +1,6 @@
 ---
+title: '@apply'
 toc: content
-nav:
-  path: /lab/smt
 ---
 
 ## @apply

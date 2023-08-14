@@ -1,7 +1,6 @@
 ---
+title: '@equalsAndHashCode'
 toc: content
-nav:
-  path: /lab/smt
 ---
 
 ## @equalsAndHashCode

@@ -1,4 +1,5 @@
 ---
+title: '@javaCompatible'
 toc: content
 nav:
   path: /lab/smt

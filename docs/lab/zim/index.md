@@ -1,8 +1,7 @@
 ---
 order: -1
+title: zim
 toc: content
-nav:
-  path: /lab/zim
 ---
 
 [![Build](https://github.com/bitlap/zim/actions/workflows/ScalaCI.yml/badge.svg?branch=master)](https://github.com/bitlap/zim/actions/workflows/ScalaCI.yml)
@@ -44,17 +43,17 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 
 基于学习考虑，zim 目前直接使用了一些实验性库。
 
-> 现已升级到zio2
+> 现已升级到 zio2
 
 ## 模块
 
 - `zim-auth` 登录鉴权，目前由 cookie 实现并对外提供“鉴权缓存”函数，具体实现由`zim-server`完成。
 - `zim-cache-api` 缓存接口定义（tagless final）。
-- `zim-cache-redis4cats` 基于redis4cats实现缓存。 
-- `zim-cache-redis4zio` 基于zio-redis实现缓存。
+- `zim-cache-redis4cats` 基于 redis4cats 实现缓存。
+- `zim-cache-redis4zio` 基于 zio-redis 实现缓存。
 - `zim-domain` 所有领域模型定义。
-- `zim-server` Server端的主要实现，包括 zio 依赖管理、基于 akka-http 的 route 实现、基于 tapir 的 API 具体实现。
-- `zim-infra` 配置和基础设施，包括系统基础配置、工具类、部分领域对象及核心CRUD实现。
+- `zim-server` Server 端的主要实现，包括 zio 依赖管理、基于 akka-http 的 route 实现、基于 tapir 的 API 具体实现。
+- `zim-infra` 配置和基础设施，包括系统基础配置、工具类、部分领域对象及核心 CRUD 实现。
 - `zim-api` tapir API 描述定义和 service、repository 接口定义（tagless final），repository 具体实现在`zim-infra`，service 具体实现在`zim-server`。
 
 ## 环境
@@ -95,7 +94,7 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 - [x] zio 中的依赖注入
 - [x] zio-streams 与 akka-stream 的集成
 - [x] zio-actors 与 akka-actor-typed 通信的集成
-- [x] zio1升级到zio2踩坑和总结 
+- [x] zio1 升级到 zio2 踩坑和总结
 - [ ] zio 如何构建一个可重用模块
 - [ ] zio 应用如何测试
 - [ ] zio-schema 应用

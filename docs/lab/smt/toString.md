@@ -1,4 +1,5 @@
 ---
+title: '@toString'
 toc: content
 nav:
   path: /lab/smt

@@ -10,6 +10,7 @@
 # production
 /dist
 /docs-dist
+.history
 
 # misc
 .DS_Store
@@ -19,3 +20,7 @@
 .umi-production
 .umi-test
 .env.local
+
+# dumi
+.dumi/tmp
+.dumi/tmp-production

@@ -1,7 +1,7 @@
 ---
+title: zio 基本介绍
 toc: content
-nav:
-  path: /lab/zim
+order: 1
 ---
 
 # zio 基本介绍

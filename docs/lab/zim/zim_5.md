@@ -1,7 +1,6 @@
 ---
 toc: content
-nav:
-  path: /lab/zim
+order: 5
 ---
 
 # zio 中的依赖注入

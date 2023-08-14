@@ -1,14 +1,13 @@
 ---
+title: csv
 toc: content
-nav:
-  path: /lab/smt
 ---
 
 # CSV
 
-## 1、smt-csv使用
+## 1、smt-csv 使用
 
-> 处理一般情况的CSV转换
+> 处理一般情况的 CSV 转换
 
 ### 支持类型
 
@@ -22,7 +21,8 @@ nav:
 - `Boolean` 、`Option[Boolean]`
 - `T`，集合：`List[T]`、`Seq[T]`、`Set[T]`、`Vector[T]`，`T` 只能是 `case class`
 
-如果`case class`的字段不是`Option`，但是CSV的该列为空（或解析失败），则解析CSV时，`case class`对象的对应字段有相应的零值。
+如果`case class`的字段不是`Option`，但是 CSV 的该列为空（或解析失败），则解析 CSV 时，`case class`对象的对应字段有相应的零值。
+
 - `Int` = `0`
 - `Long` = `0L`
 - `String` = `""`
@@ -36,14 +36,16 @@ nav:
 
 对于`Option[_]`类型，为空的列始终有默认值`None`
 
-## 2、使用builder构造器
+## 2、使用 builder 构造器
 
 **依赖**
+
 ```
 "org.bitlap" %% "smt-csv" % "<VERSION>" // 使用最新的
 ```
 
-给定下面这种复杂的CSV测试数据，其中第三列是个JSON。
+给定下面这种复杂的 CSV 测试数据，其中第三列是个 JSON。
+
 ```
 val csvData =
   """100,1,"{""city"":""北京"",""os"":""Mac""}",vv,1
@@ -64,7 +66,8 @@ val csvData =
     |200,3,"{""city"":""北京"",""os"":""Mac""}",pv,2""".stripMargin
 ```
 
-需要将其转换到下面的`case class`中，目前CSV列需要与`case class`的字段顺序一一对应
+需要将其转换到下面的`case class`中，目前 CSV 列需要与`case class`的字段顺序一一对应
+
 ```scala
 case class Metric(time: Long, entity: Int, dimensions: List[Dimension], metricName: String, metricValue: Int)
 case class Dimension(key: String, value: String)
@@ -72,7 +75,7 @@ case class Dimension(key: String, value: String)
 
 > 这里的级联调用不能分开
 
-### CSV字符串转Scala
+### CSV 字符串转 Scala
 
 ```scala
 val metrics: List[Option[Metric]] = ReaderBuilder[Metric]
@@ -86,9 +89,9 @@ val metrics: List[Option[Metric]] = ReaderBuilder[Metric]
   .convert(csvData.split("\n").toList)
 ```
 
-### Scala转CSV字符串
+### Scala 转 CSV 字符串
 
-> 将上面的`metrics`转换为CSV行数据
+> 将上面的`metrics`转换为 CSV 行数据
 
 ```scala
 val csv: String = WriterBuilder[Metric]
@@ -99,9 +102,9 @@ val csv: String = WriterBuilder[Metric]
   .convert(metrics.filter(_.isDefined).map(_.get))
 ```
 
-> 暂时没有考虑特殊情况：CSV中JSON结构必须是这种形式：`"{""city"":""北京"",""os"":""Mac""}"`，整个JSON在双引号中且JSON里面的引号是2个。
+> 暂时没有考虑特殊情况：CSV 中 JSON 结构必须是这种形式：`"{""city"":""北京"",""os"":""Mac""}"`，整个 JSON 在双引号中且 JSON 里面的引号是 2 个。
 
-### 快速解析CSV文件
+### 快速解析 CSV 文件
 
 ```scala
 val metrics =
@@ -113,12 +116,12 @@ val metrics =
     .convertFrom(ClassLoader.getSystemResourceAsStream("simple_data.csv"))
 ```
 
+## 3、使用 converter 自动派生器
 
-## 3、使用converter自动派生器
-
-> 简化代码，自动派生`implicit val csvConverter: Converter[T]`，支持类型与smt-csv-core相同。
+> 简化代码，自动派生`implicit val csvConverter: Converter[T]`，支持类型与 smt-csv-core 相同。
 
 **依赖**
+
 ```
 "org.bitlap" %% "smt-csv-derive" % "<VERSION>" // 使用最新的
 ```
@@ -141,7 +144,7 @@ val csv = Converter[List[Dimension2]].toCsvString(dimension.orNull)
 ### 自定义处理复杂结构
 
 > 同样使用上面的`csvData`数据
-  
+
 ```scala
 case class CsvLine4(time: Long, entity: Int, dimensions: List[Dimension], metricName: String, metricValue: Int)
 case class Dimension(key: String, value: String)
@@ -163,7 +166,7 @@ val csvLines: Option[List[CsvLine4]] = Converter[List[CsvLine4]].toScala(csvData
 val csvString :Strng = Converter[List[CsvLine4]].toCsvString(csvs.orNull)
 ```
 
-## 4、使用CsvFormat解析TSV
+## 4、使用 CsvFormat 解析 TSV
 
 ```scala
 implicit val format = new TsvFormat {
@@ -180,4 +183,4 @@ val file = new File("./simple_data_header.tsv")
 WriterBuilder[Metric].convertTo(metrics.filter(_.isDefined).map(_.get), file)
 ```
 
-> 实际上CSV中也使用了默认的format隐式参数`implicit val defaultCsvFormat: CsvFormat = new DefaultCsvFormat {}`，如果像TSV这样自己定义一个，那么就会覆盖默认的隐式。
+> 实际上 CSV 中也使用了默认的 format 隐式参数`implicit val defaultCsvFormat: CsvFormat = new DefaultCsvFormat {}`，如果像 TSV 这样自己定义一个，那么就会覆盖默认的隐式。

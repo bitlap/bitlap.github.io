@@ -1,7 +1,6 @@
 ---
 toc: content
-nav:
-  path: /lab/zim
+order: 4
 ---
 
 # zio 流处理介绍

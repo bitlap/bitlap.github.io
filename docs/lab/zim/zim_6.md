@@ -1,7 +1,6 @@
 ---
 toc: content
-nav:
-  path: /lab/zim
+order: 6
 ---
 
 # zio-streams 与 akka-stream 的集成
@@ -14,6 +13,7 @@ nav:
 受限于第一次写 zio 应用，目前也只能把东西搞出来，至于搞得好不好目前看来还不行，所以请忽悠以下代码的丑陋，仅供学习和参考。
 
 zim 第二个问题是，需要兼容旧的前端接口，旧返回结构`ResultSet`如下：
+
 ```json
 {
     "code": 0,
@@ -28,8 +28,7 @@ zim 第二个问题是，需要兼容旧的前端接口，旧返回结构`Result
 }
 ```
 
-
-由于最终在外层包裹了一层JSON，所以实际上是把`ZStream`作为一个普通集合来使用的，并没有使用流的特性。
+由于最终在外层包裹了一层 JSON，所以实际上是把`ZStream`作为一个普通集合来使用的，并没有使用流的特性。
 个人认为，因为最终返回的是一个大对象而不是`List`生成的 stream，这意味即使使用流了，也是一次性传输的。
 
 > 鉴于上面的大前提，下面仅是解决思路，不是最佳实践。
@@ -64,18 +63,20 @@ akka-stream
 ```
 
 上面代码的一些注意事项：
+
 1. 该函数需要输入一个`Stream[Throwable, T]`（`ZStream`的别名）
 2. 该函数需要泛型`T`，以便支持所有`T`的序列化，这里`asJson`来自`Circe`库。
-3. 该函数输出一个akka stream类型`Future[Either[ZimError, Source[ByteString, Any]]]`，最外层加`Future`是为了给tapir使用。
-    - 这里是从`Publisher`创建`Source`的
-    - 该函数直接在内存进行`runCollect`，以便生成`ResultSet`对象所需要的`data`数据，创建出完整的`ResultSet`结构
-    - 使用 zio-interop-reactivestreams 提供的`toPublisher`函数将`ZStream`转换为 reactive Streams，也就是 akka stream
+3. 该函数输出一个 akka stream 类型`Future[Either[ZimError, Source[ByteString, Any]]]`，最外层加`Future`是为了给 tapir 使用。
+   - 这里是从`Publisher`创建`Source`的
+   - 该函数直接在内存进行`runCollect`，以便生成`ResultSet`对象所需要的`data`数据，创建出完整的`ResultSet`结构
+   - 使用 zio-interop-reactivestreams 提供的`toPublisher`函数将`ZStream`转换为 reactive Streams，也就是 akka stream
 
 如果不需要包装一层`ResultSet`就更方便了。
 
 **使用**
 
-这里是使用了tapir，暂时忽略。
+这里是使用了 tapir，暂时忽略。
+
 ```scala
   lazy val getOffLineMessageRoute: Route =
     AkkaHttpServerInterpreter().toRoute(ZimUserEndpoint.getOffLineMessageEndpoint.serverLogic { user => _ =>
@@ -85,14 +86,15 @@ akka-stream
     })
 ```
 
-这样就创建了一个 akka-stream 的`Route`对象了。tapir 的好处是能使用 DSL 来描述请求和响应，并具备文档化的能力，同时兼容各大 Scala web平台。
+这样就创建了一个 akka-stream 的`Route`对象了。tapir 的好处是能使用 DSL 来描述请求和响应，并具备文档化的能力，同时兼容各大 Scala web 平台。
 需要注意的是，这里的`Route`和 akka http 自己的`Route`对使用者来说是没有任何区别。
 
-# ZStream 错误处理
+## ZStream 错误处理
 
 在 ZIO 中，抛异常可以使用`ZIO.fail(BusinessException())`，或者在 stream 中使用`ZStream.fail(BusinessException())`，他们的处理方式相同。
 
 以 zim 为例，有以下业务异常：
+
 ```scala
 sealed trait ZimError extends Throwable with Product {
   val msg: String
@@ -119,7 +121,7 @@ object ZimError {
         Logger.root.error(s"Request to $uri could not be handled normally cause by ${e.toString}")
         getFromResource("static/html/403.html")
       }
-    case e: Exception => 
+    case e: Exception =>
       extractUri { uri =>
         Logger.root.error(s"Request to $uri could not be handled normally cause by ${e.toString}")
         getFromResource("static/html/500.html")
@@ -128,13 +130,14 @@ object ZimError {
 ```
 
 还有一种方法是在 ZIO 处理完逻辑结束时，通过 ZIO 提供的一些操作把前面抛出的业务异常捕获为有效的返回数据，比如转成 json，如下：
+
 ```scala
   def buildFlowResponse[T <: Product]
     : stream.Stream[Throwable, T] => Future[Either[ZimError, Source[ByteString, Any]]] = respStream => {
     val resp = (for {
       list <- respStream.runCollect // 这样就变成了 ZIO 包含 List数据，不能没办法包一层 ResultSet
       resp = ResultSet[List[T]](data = list.toList).asJson.noSpaces
-      r <- ZStream(resp).map(body => ByteString(body)).toPublisher 
+      r <- ZStream(resp).map(body => ByteString(body)).toPublisher
     } yield r).catchSome(catchStreamError) // 捕获一些特定异常，这样返回给akka-http的就不会出现错误，而是一个正常的 json
 
     Future.successful(

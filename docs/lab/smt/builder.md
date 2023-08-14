@@ -1,7 +1,6 @@
 ---
+title: '@builder'
 toc: content
-nav:
-  path: /lab/smt
 ---
 
 ## @builder

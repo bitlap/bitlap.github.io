@@ -1,7 +1,6 @@
 ---
 toc: content
-nav:
-  path: /lab/zim
+order: 2
 ---
 
 # zio1.x 模块模式之 1.0

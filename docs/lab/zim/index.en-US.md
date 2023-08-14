@@ -1,7 +1,6 @@
 ---
+title: zim
 toc: content
-nav:
-  path: /en-US/lab/zim
 ---
 
 [![Build](https://github.com/bitlap/zim/actions/workflows/ScalaCI.yml/badge.svg?branch=master)](https://github.com/bitlap/zim/actions/workflows/ScalaCI.yml)
