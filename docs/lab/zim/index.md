@@ -95,7 +95,7 @@ zim 初衷是学习从零开发一个纯 scala 式的应用程序，为何选择
 - [x] zio 中的依赖注入
 - [x] zio-streams 与 akka-stream 的集成
 - [x] zio-actors 与 akka-actor-typed 通信的集成
-- [ ] zio1升级到zio2踩坑和总结 
+- [x] zio1升级到zio2踩坑和总结 
 - [ ] zio 如何构建一个可重用模块
 - [ ] zio 应用如何测试
 - [ ] zio-schema 应用
