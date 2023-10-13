@@ -43,3 +43,23 @@ order: 0
 6. 使用`sbt headerCheckAll` 检查文件头
 7. 使用`sbt coverage test coverageReport` 执行测试
 8. 创建 pull request
+
+
+## 详细文章
+
+我的博客 https://blog.dreamylost.cn/
+
+- [x] 如何快速开始
+- [x] zio 基本介绍
+- [x] zio1.x 模块模式之 1.0
+- [x] zio1.x 模块模式之 2.0
+- [x] zio-streams、与 scalikejdbc-streams 的集成
+- [x] zio 中的依赖注入
+- [x] zio-streams 与 akka-stream 的集成
+- [x] zio-actors 与 akka-actor-typed 通信的集成
+- [x] zio1 升级到 zio2 踩坑和总结
+- [ ] zio 如何构建一个可重用模块
+- [ ] zio 应用如何测试
+- [ ] zio-schema 应用
+- [ ] 如何编写 tapir 应用
+- [ ] 如何编写 akka-http 接口
